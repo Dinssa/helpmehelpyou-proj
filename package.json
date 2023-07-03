@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://${client_host}:${server_port}"
+  "proxy": "http://${CLIENT_HOST}:${SERVER_PORT}"
 }
