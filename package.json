@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://${CLIENT_HOST}:${SERVER_PORT}"
+  "proxy": "http://localhost:3001"
 }

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-
+import { signUp } from '../../utilities/user-service.js';
 
 export default class SignUpForm extends Component {
        
@@ -17,7 +17,19 @@ export default class SignUpForm extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        alert('Sign Up Submitted');
+        try {
+            const formData = { ...this.state };
+
+            delete formData.confirm;
+            delete formData.error;
+
+            const user = await signUp(formData);
+
+            console.log(user);
+            // this.setState()
+        } catch (error) {
+            this.setState({ error: error.message });
+        }
     };
 
     render() {
