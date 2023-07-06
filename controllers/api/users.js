@@ -15,13 +15,6 @@ async function create(req, res) {
     } catch (err) {
         return res.status(401).json(err);
     }
-
-    res.json({
-        user: {
-        name: req.body.name,
-        email: req.body.email
-        }
-    });
 }
 
 function createJWT(user) {
@@ -44,7 +37,15 @@ async function login(req, res) {
     }
 }
 
+function checkToken(req, res) {
+    // req.user will always be there for you when a token is sent
+    // in the Authorization header
+    console.log('req.user', req.user);
+    return res.json(req.exp);
+}
+
 module.exports = {
     create,
-    login
+    login,
+    checkToken
 };

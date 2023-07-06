@@ -16,6 +16,10 @@ app.use(express.json()); // Parse incoming requests data and make it available u
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico'))); // Serve favicon
 app.use(express.static(path.join(__dirname, 'build'))); // Serve static files from the React app
 
+// Middleware to verify token and assign user object of payload to req.user.
+// Be sure to mount before routes
+app.use(require('./config/checkToken'));
+
 // * API routes
 // we'll use a route prefix of /api for all of our routes
 app.get('/api', (req, res) => {

@@ -49,3 +49,11 @@ export function getUserFromToken() {
 export function logOut() {
   localStorage.removeItem('token');
 }
+
+export function checkToken() {
+  // Just so that you don't forget how to use .then
+  return usersAPI.checkToken()
+    // checkToken returns a string, but let's 
+    // make it a Date object for more flexibility
+    .then(dateStr => new Date(dateStr));
+}

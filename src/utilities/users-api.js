@@ -3,12 +3,16 @@
 // It should not contain any application logic
 // Other functionality like saving a token to localStorage, can be done in the service module.
 
+import sendRequest from './send-request';
 const BASE_URL = '/api/users';
 
 // * CREATE A USER
 // Method:
 
 export async function signUp(userData) {
+
+  return sendRequest(BASE_URL, 'POST', userData);
+
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc. 
   const res = await fetch(BASE_URL, {
@@ -28,6 +32,9 @@ export async function signUp(userData) {
 }
 
 export async function login(credentials) {
+
+  return sendRequest(`${BASE_URL}/login`, 'POST', credentials);
+
   const res = await fetch(BASE_URL + '/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -38,4 +45,8 @@ export async function login(credentials) {
   } else {
     throw new Error('Bad Credentials');
   }
+}
+
+export function checkToken() {
+  return sendRequest(`${BASE_URL}/check-token`);
 }
