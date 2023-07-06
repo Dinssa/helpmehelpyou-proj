@@ -10,7 +10,7 @@ export async function signUp(userData) {
     // Persist the "token"
     localStorage.setItem('token', token);
 
-    return token;
+    return getUserFromToken();
 }
 
 export function getToken() {
