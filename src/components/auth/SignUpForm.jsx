@@ -25,8 +25,8 @@ export default class SignUpForm extends Component {
 
             const user = await signUp(formData);
 
-            console.log(user);
-            // this.setState()
+            this.props.setUser(user);
+            
         } catch (error) {
             this.setState({ error: error.message });
         }

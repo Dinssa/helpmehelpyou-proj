@@ -2,6 +2,17 @@
 
 import * as usersAPI from './users-api';
 
+export async function login(credentials) {
+    // Delegate the network request code to the users-api.js API module
+    // which will ultimately return a JSON Web Token (JWT)
+    const token = await usersAPI.login(credentials);
+
+    // Persist the "token"
+    localStorage.setItem('token', token);
+
+    return getUserFromToken();
+}
+
 export async function signUp(userData) {
     // Delegate the network request code to the users-api.js API module
     // which will ultimately return a JSON Web Token (JWT)
