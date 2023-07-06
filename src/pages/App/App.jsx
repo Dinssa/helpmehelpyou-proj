@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 // Router
 import { Routes, Route } from 'react-router-dom';
+// Token
+import { getUserFromToken } from '../../utilities/user-service';
 
 // Custom components
 import AuthPage from '../AuthPage';
@@ -11,7 +13,7 @@ import OrderHistoryPage from '../OrderHistoryPage';
 import Nav from '../../components/global/Nav';
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(getUserFromToken())
   return (
     <main className="App">
       {user ? 
