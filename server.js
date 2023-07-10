@@ -17,18 +17,17 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico'))); // Serve favicon
 app.use(express.static(path.join(__dirname, 'build'))); // Serve static files from the React app
 
 // Middleware to verify token and assign user object of payload to req.user.
-// Be sure to mount before routes
 app.use(require('./config/checkToken'));
 
 // * API routes
-// we'll use a route prefix of /api for all of our routes
+// Route prefix of /api for all of our routes
 app.get('/api', (req, res) => {
     res.send('Hello from API route');
 });
 
 app.use('/api/users', require('./routes/api/users')); // API routes for users
 
-// if no API routes are hit, send the React app
+// If no API routes are hit, send the React app
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

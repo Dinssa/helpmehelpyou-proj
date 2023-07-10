@@ -5,7 +5,6 @@ export default function OrderHistoryPage(){
         // const user = getUserFromToken();
         const expDate = await checkToken();
         alert('clicked')
-        console.log(expDate)
     }
 
     return (

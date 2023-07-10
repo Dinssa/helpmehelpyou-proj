@@ -6,17 +6,17 @@
 import sendRequest from './send-request';
 const BASE_URL = '/api/users';
 
-// * CREATE A USER
-// Method:
-
+// Create a user
 export async function signUp(userData) {
   return sendRequest(BASE_URL, 'POST', userData);
 }
 
+// Login a user
 export async function login(credentials) {
   return sendRequest(`${BASE_URL}/login`, 'POST', credentials);
 }
 
+// Check if a token is valid
 export function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }

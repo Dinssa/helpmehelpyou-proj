@@ -32,8 +32,8 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// Just before saving out user, after validation and right before saving to DB, we want to hash the password
-// We'll use bcrypt to hash the password, but mongoose provides us with a pre hook so we can execute a callback function just before the user is created
+// Just before saving our user, after validation and right before saving to DB, we want to hash the password
+// We'll use bcrypt to hash the password, mongoose provides us with a pre hook so we can execute a callback function just before the user is created
 
 userSchema.pre('save', function (next) {
     // 'this' will be set to the current document about to be saved
@@ -48,7 +48,5 @@ userSchema.pre('save', function (next) {
     next();
 });
 
-
-// ! Always make sure to export the model last
 // We assign the model to a variable so we can use it in other files, and use model methods to CRUD our data
 module.exports = mongoose.model('User', userSchema); // Export the model with the schema attached
