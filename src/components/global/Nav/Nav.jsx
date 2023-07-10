@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import './Nav.css'
-import * as userService from '../../utilities/user-service';
+import * as userService from '../../../utilities/users-service';
 
 export default function Nav({user, setUser}){
 

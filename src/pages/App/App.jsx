@@ -4,13 +4,13 @@ import { useState } from 'react';
 // Router
 import { Routes, Route } from 'react-router-dom';
 // Token
-import { getUserFromToken } from '../../utilities/user-service';
+import { getUserFromToken } from '../../utilities/users-service';
 
 // Custom components
-import AuthPage from '../AuthPage';
+import AuthPage from '../Auth/AuthPage';
 import NewOrderPage from '../NewOrderPage';
 import OrderHistoryPage from '../OrderHistoryPage';
-import Nav from '../../components/global/Nav';
+import Nav from '../../components/global/Nav/Nav';
 
 function App() {
   const [user, setUser] = useState(getUserFromToken())
