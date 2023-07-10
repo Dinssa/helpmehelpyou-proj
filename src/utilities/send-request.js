@@ -1,4 +1,4 @@
-import { getToken } from './user-service';
+import { getToken } from './users-service';
 
 
 export default async function sendRequest(url, method = 'GET', payload = null) {
