@@ -14,8 +14,8 @@ export default function Nav({user, setUser}){
 
     return (
         <nav className="bg-primary text-white">
-            <div>
-                <h3 className="ms-3 p-1">helpmehelpyou</h3>
+            <div className="page-title">
+                <Link to="/"><h3 className="ms-3 p-1">helpmehelpyou</h3></Link>
             </div>
             
             { user ? 

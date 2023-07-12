@@ -29,7 +29,7 @@ nav{
     width: 30%;
 }
 
-.NavItem > a{
+.NavItem > a, .page-title > a{
     text-decoration: none;
     color: #ffffff;
     font-size: 1.2rem;
