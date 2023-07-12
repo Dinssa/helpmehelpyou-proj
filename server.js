@@ -26,6 +26,9 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/users', require('./routes/api/users')); // API routes for users
+app.use('/api/projects', require('./routes/api/projects')); // API routes for projects
+app.use('/api/templates', require('./routes/api/templates')); // API routes for templates
+app.use('/api/forms', require('./routes/api/forms')); // API routes for forms
 
 // If no API routes are hit, send the React app
 app.get('*', (req, res) => {
