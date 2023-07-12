@@ -10,8 +10,6 @@ export default function Nav({user, setUser}){
         setUser(null)
     }
 
-    console.log(user)
-
     return (
         <nav className="bg-primary text-white">
             <div className="page-title">
@@ -22,10 +20,10 @@ export default function Nav({user, setUser}){
                 <>
                 <ul className="NavList">
                     <li className="NavItem">
-                        <Link to=""><i className="fa-solid fa-bell"></i></Link>
+                        <Link to="#"><i className="fa-solid fa-bell"></i></Link>
                     </li>
                     <li className="NavItem">
-                        <Link to=""><i className="fa-solid fa-envelope"></i></Link>
+                        <Link to="#"><i className="fa-solid fa-envelope"></i></Link>
                     </li>
 
                     { user.roles.includes('Freelancer') ?
@@ -67,8 +65,8 @@ export default function Nav({user, setUser}){
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#">Settings</Dropdown.Item>
+                        <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                        <Dropdown.Item href="/settings">Settings</Dropdown.Item>
                         <Dropdown.Item href="" onClick={handleLogOut}>Sign Out</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
@@ -77,10 +75,10 @@ export default function Nav({user, setUser}){
             :
                 <ul className="NavList">
                     <li className="NavItem">
-                        <Link to="/">Clients</Link>
+                        <Link to="/clients">Clients</Link>
                     </li>
                     <li className="NavItem">
-                        <Link to="/">Freelancers</Link>
+                        <Link to="/freelancers">Freelancers</Link>
                     </li>
                     <li className="NavItem signin">
                         <Link to="/auth">Sign In</Link>
