@@ -7,6 +7,7 @@ const logger = require('morgan');
 require('dotenv').config(); // Load environment variables from .env file
 
 require('./config/database'); // Connect to MongoDB with Mongoose
+const swagger = require('./config/swagger');
 
 const app = express();
 
@@ -21,14 +22,15 @@ app.use(require('./config/checkToken'));
 
 // * API routes
 // Route prefix of /api for all of our routes
-app.get('/api', (req, res) => {
-    res.send('Hello from API route');
-});
+
+
 
 app.use('/api/users', require('./routes/api/users')); // API routes for users
 app.use('/api/projects', require('./routes/api/projects')); // API routes for projects
 app.use('/api/templates', require('./routes/api/templates')); // API routes for templates
 app.use('/api/forms', require('./routes/api/forms')); // API routes for forms
+
+swagger(app);
 
 // If no API routes are hit, send the React app
 app.get('*', (req, res) => {
