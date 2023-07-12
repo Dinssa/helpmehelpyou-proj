@@ -1,6 +1,6 @@
 nav{
     width: 100%;
-    height: 60px;
+    height: 5rem;
     margin-bottom: 10px;
     border-bottom: 3px solid #e5e5e5;
     box-shadow: 0 1px 2px rgba(0,0,0,.1);
@@ -15,12 +15,13 @@ nav{
 .NavList, .AccountList{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
+    padding-right: 1rem;
     list-style: none;
 }
 
@@ -28,6 +29,60 @@ nav{
     width: 30%;
 }
 
-.NavItem{
-    padding: 4px;
+.NavItem > a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.NavItem > a:hover{
+    /* background-color: rgba(255, 255, 255, 0.05); */
+    color: var(--fourth);
+}
+
+.signin > a {
+    background-color: var(--fourth);
+    border: 2px solid var(--fourth);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.signin > a:hover{
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.avatar{
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar > img{
+    width: 99%;
+    height: 99%;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.default-icon{
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 2.7rem;
+    height: 2.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.default-icon > .fa-user {
+    color: var(--fifth);
+    font-size: 1.9rem;
 }
