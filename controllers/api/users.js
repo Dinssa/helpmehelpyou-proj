@@ -1,7 +1,13 @@
-
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
+module.exports = {
+    create,
+    login,
+    checkToken,
+    update
+};
 
 async function create(req, res) {
     try{
@@ -12,6 +18,18 @@ async function create(req, res) {
         const token = createJWT(user);
 
         return res.json(token);
+    } catch (err) {
+        return res.status(401).json(err);
+    }
+}
+
+async function update(req, res) {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) throw new Error('User not found');
+        Object.assign(user, req.body);
+        await user.save();
+        return res.json(user);
     } catch (err) {
         return res.status(401).json(err);
     }
@@ -41,8 +59,3 @@ function checkToken(req, res) {
     return res.json(req.exp);
 }
 
-module.exports = {
-    create,
-    login,
-    checkToken
-};
