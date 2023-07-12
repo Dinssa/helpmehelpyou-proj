@@ -45,6 +45,10 @@ nav{
     color: var(--fourth);
 }
 
+.NavItem > a.active{
+    color: var(--fourth);
+}
+
 .signin > a {
     background-color: var(--fourth);
     border: 2px solid var(--fourth);

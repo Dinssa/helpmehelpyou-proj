@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import './Nav.css'
 import * as userService from '../../../utilities/users-service';
 import { Dropdown } from 'react-bootstrap';
@@ -28,11 +28,11 @@ export default function Nav({user, setUser}){
 
                     { user.roles.includes('Freelancer') ?
                         <>
-                        <li className="NavItem">
-                            <Link to="/projects">Projects</Link>
+                            <li className="NavItem ">
+                                <NavLink to="/projects" activeClassName="active">Projects</NavLink>
                             </li>
                             <li className="NavItem">
-                                <Link to="/templates">Templates</Link>
+                                <NavLink to="/templates" activeClassName="active">Templates</NavLink>
                             </li>
                         </>
                         :
@@ -42,7 +42,7 @@ export default function Nav({user, setUser}){
                     { user.roles.includes('Client') ?
                         <>
                         <li className="NavItem">
-                            <Link to="/forms">Forms</Link>
+                            <NavLink to="/forms" activeClassName="active">Forms</NavLink>
                         </li>
                         </>
                         :
@@ -63,7 +63,6 @@ export default function Nav({user, setUser}){
                 <Dropdown id="nav-dropdown">
                     <Dropdown.Toggle variant="" id="dropdown-btn">
                     </Dropdown.Toggle>
-
                     <Dropdown.Menu>
                         <Dropdown.Item href="/profile">Profile</Dropdown.Item>
                         <Dropdown.Item href="/settings">Settings</Dropdown.Item>
@@ -75,10 +74,10 @@ export default function Nav({user, setUser}){
             :
                 <ul className="NavList">
                     <li className="NavItem">
-                        <Link to="/clients">Clients</Link>
+                        <NavLink to="/clients" activeClassName="active">Clients</NavLink>
                     </li>
                     <li className="NavItem">
-                        <Link to="/freelancers">Freelancers</Link>
+                        <NavLink to="/freelancers" activeClassName="active">Freelancers</NavLink>
                     </li>
                     <li className="NavItem signin">
                         <Link to="/auth">Sign In</Link>
