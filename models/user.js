@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 12;
 
-const defaultAvatar = '/assets/images/user-solid.svg';
+// const defaultAvatar = '/assets/images/user-solid.svg';
 
 const userSchema = new mongoose.Schema({
     firstName: String,
@@ -22,9 +22,14 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: defaultAvatar
+        // default: defaultAvatar
     },
     googleId: String,
+    roles: [{
+        type: String,
+        enum: ['Client', 'Freelancer', 'Admin'],
+        default: 'Client'
+    }]
 }, {
     timestamps: true,
     toJSON: {
