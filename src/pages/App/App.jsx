@@ -38,7 +38,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/404" element={<PageNotFound />} />
-          <Route path="*" element={<Navigate to="/404" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         :
         <Routes>
@@ -47,7 +47,7 @@ function App() {
           <Route path="/freelancers" element={<FreelancersPage />} />
           <Route path="/auth" element={<AuthPage setUser={setUser} />} />
           <Route path="/404" element={<PageNotFound />} />
-          <Route path="*" element={<Navigate to="/404" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       }      
     </main>
