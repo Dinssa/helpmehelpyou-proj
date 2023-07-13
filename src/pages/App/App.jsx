@@ -2,7 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 // Router
-import { Navigate, Routes, Route } from 'react-router-dom';
+import { Navigate, Routes, Route, useLocation } from 'react-router-dom';
 // Token
 import { getUserFromToken } from '../../utilities/users-service';
 
@@ -24,6 +24,7 @@ import SettingsPage from '../Account/SettingsPage';
 
 function App() {
   const [user, setUser] = useState(getUserFromToken())
+  const location = useLocation();
 
   return (
     <main className="App">
@@ -40,7 +41,8 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/404" element={<PageNotFound />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/auth" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
         :
         <Routes>
@@ -49,7 +51,8 @@ function App() {
           <Route path="/freelancers" element={<FreelancersPage />} />
           <Route path="/auth" element={<AuthPage setUser={setUser} />} />
           <Route path="/404" element={<PageNotFound />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          {location.pathname.endsWith('#signout') && <Route path="*" element={<Navigate to="/" />} />}
+          <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
       }      
     </main>
