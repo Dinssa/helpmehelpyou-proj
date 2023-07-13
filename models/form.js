@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 const submissionsSchema = new mongoose.Schema({
     fields: {
@@ -32,15 +33,13 @@ const formSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.Mixed],
         required: true
     },
-    url: {
+    uuid: {
         type: String,
-        required: true,
-        validate: {
-          validator: function(v) {
-            return /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w.-]*)*\/?$/.test(v);
-          },
-          message: props => `${props.value} is not a valid URL`
-        }
+        default: uuidv4,
+        set: function(uuid) {
+            return uuid.substr(0, 6);
+        },
+        unique: true
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -66,6 +65,10 @@ const formSchema = new mongoose.Schema({
 formSchema.virtual('archived').get(function() {
     const project = mongoose.model('Project').findOne({ forms: this._id });
     return project ? project.archived : false;
+});
+
+formSchema.virtual('shortUrl').get(function() {
+    return `forms/${this.uuid}`;
 });
 
 module.exports = mongoose.model('Form', formSchema);
