@@ -5,8 +5,14 @@ const SALT_ROUNDS = 12;
 // const defaultAvatar = '/assets/images/user-solid.svg';
 
 const notificationSchema = new mongoose.Schema({
-    message: String,
-    link: String,
+    message: {
+        type: String, 
+        required: true
+    },
+    link: {
+        type: String, 
+        required: true
+    },
     from: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -32,7 +38,10 @@ const notificationSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-    firstName: String,
+    firstName: {
+        type: String,
+        required: true
+    },
     lastName: String,
     email: {
         type: String,

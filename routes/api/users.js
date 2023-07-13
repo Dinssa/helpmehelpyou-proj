@@ -7,7 +7,6 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
  * @swagger
  * tags:
  *   name: Users
- *   description: User management
  * /api/users:
  *   post:
  *     summary: Creates a new user.
@@ -28,6 +27,8 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
  *               properties:
  *                 token:
  *                   type: string
+ *       400:
+ *        description: Bad request. Invalid request body.
  *       401:
  *         description: Unauthorised. Invalid credentials.
  */
