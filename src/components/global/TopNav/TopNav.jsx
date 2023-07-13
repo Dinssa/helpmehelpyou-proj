@@ -37,7 +37,7 @@ export default function TopNav({user, setUser}) {
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
               className="bg-primary"
-              style={{ maxWidth: '300px' }} 
+              style={{ maxWidth: !isMd ? '300px' : 'none' }}
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`} className='text-white ms-2'>

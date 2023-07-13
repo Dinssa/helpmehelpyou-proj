@@ -69,3 +69,38 @@ button.navbar-toggler.collapsed{
 #dropdown-btn:hover{
     color: var(--fourth);
 }
+
+.avatar{
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar > img{
+    width: 99%;
+    height: 99%;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.NavItem > a.active{
+    color: var(--fourth);
+}
+
+.default-icon{
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 2.7rem;
+    height: 2.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.default-icon > .fa-user {
+    color: var(--fifth);
+    font-size: 1.9rem;
+}
