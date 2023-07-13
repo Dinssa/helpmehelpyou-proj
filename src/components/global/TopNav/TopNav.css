@@ -1,0 +1,71 @@
+.navbar{
+    padding: 0.5rem;
+    height: 5.5rem;
+}
+
+.page-title{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.NavItem > a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.signin > a {
+    background-color: var(--fourth);
+    border: 2px solid var(--fourth);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.signin > a:hover{
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+button.navbar-toggler.collapsed{
+    background-color: var(--fourth);
+    border: none;
+}
+
+.NavItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-menu{
+    position: absolute;
+    right: 0;
+    background-color: var(--fourth);
+}
+
+.dropdown-item{
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.dropdown-item:hover{
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--third)
+}
+
+.dropdown-menu[data-bs-popper] {
+    left: unset;
+}
+
+#dropdown-btn{
+    border: none;
+    color: #ffffff;
+}
+
+#dropdown-btn:hover{
+    color: var(--fourth);
+}

@@ -22,9 +22,6 @@ export default function Nav({user, setUser}){
                     <li className="NavItem">
                         <Link to="#"><i className="fa-solid fa-bell"></i></Link>
                     </li>
-                    <li className="NavItem">
-                        <Link to="#"><i className="fa-solid fa-envelope"></i></Link>
-                    </li>
 
                     { user.roles.includes('Freelancer') ?
                         <>

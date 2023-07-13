@@ -8,7 +8,8 @@ import { getUserFromToken } from '../../utilities/users-service';
 
 // * Pages
 // Universal
-import Nav from '../../components/global/Nav/Nav';
+// import Nav from '../../components/global/Nav/Nav';
+import TopNav from '../../components/global/TopNav/TopNav';
 import AuthPage from '../Auth/AuthPage';
 import HomePage from '../Home/HomePage';
 import ClientsPage from '../Meta/ClientsPage';
@@ -26,7 +27,8 @@ function App() {
 
   return (
     <main className="App">
-      <Nav user={user} setUser={setUser} />
+      {/* <Nav user={user} setUser={setUser} /> */}
+      <TopNav user={user} setUser={setUser} />
       { user ? 
         <Routes>
           <Route path="/" element={<HomePage />} />
