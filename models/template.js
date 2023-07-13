@@ -7,6 +7,11 @@ const templateSchema = new mongoose.Schema({
         maxLength: 70,
         trim: true
     },
+    desc: {
+        type: String,
+        maxLength: 200,
+        trim: true
+    },
     fields: {
         type: [mongoose.Schema.Types.Mixed],
         required: true
