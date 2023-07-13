@@ -51,7 +51,12 @@ function App() {
           <Route path="/freelancers" element={<FreelancersPage />} />
           <Route path="/auth" element={<AuthPage setUser={setUser} />} />
           <Route path="/404" element={<PageNotFound />} />
-          {location.pathname.endsWith('#signout') && <Route path="*" element={<Navigate to="/" />} />}
+          <Route path="/forms" element={<Navigate to="/" />} />
+          <Route path="/profile" element={<Navigate to="/" />} />
+          <Route path="/settings" element={<Navigate to="/" />} />
+          <Route path="/projects" element={<Navigate to="/" />} />
+          <Route path="/templates" element={<Navigate to="/" />} />
+          {/* {location.pathname.endsWith('#signout') && <Route path="*" element={<Navigate to="/" />} />} */}
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
       }      
