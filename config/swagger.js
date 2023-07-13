@@ -56,7 +56,7 @@ const options = {
                 },
                 required: ['firstName', 'email', 'password']
               },
-              Project: {
+            Project: {
                 type: 'object',
                 properties: {
                   name: {
@@ -102,10 +102,10 @@ const options = {
                   archived: {
                     type: 'boolean'
                   }
-                },
-                required: ['name']
               },
-              Form: {
+              required: ['name']
+            },
+            Form: {
                 type: 'object',
                 properties: {
                   name: {
@@ -137,8 +137,8 @@ const options = {
                   }
                 },
                 required: ['name', 'fields', 'url', 'owner']
-              },
-              Template: {
+            },
+            Template: {
                 type: 'object',
                 properties: {
                   name: {
@@ -167,7 +167,7 @@ const options = {
                   }
                 },
                 required: ['name', 'fields', 'type']
-              }
+            }
         }
     }
   },
