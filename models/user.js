@@ -4,6 +4,33 @@ const SALT_ROUNDS = 12;
 
 // const defaultAvatar = '/assets/images/user-solid.svg';
 
+const notificationSchema = new mongoose.Schema({
+    message: String,
+    link: String,
+    from: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    form: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Form'
+    },
+    read: {
+        type: Boolean,
+        default: false
+    }
+}, {
+    timestamps: true,
+    toJSON: {
+        virtuals: true,
+        transform: (doc, ret) => {
+            delete ret._id;
+            delete ret.__v;
+            return ret;
+        }
+    }
+});
+
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
@@ -29,7 +56,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['Client', 'Freelancer', 'Admin'],
         default: 'Client'
-    }]
+    }],
+    notifications: [notificationSchema],
 }, {
     timestamps: true,
     toJSON: {

@@ -1,5 +1,26 @@
 const mongoose = require('mongoose');
 
+const submissionsSchema = new mongoose.Schema({
+    fields: {
+        type: [mongoose.Schema.Types.Mixed],
+        required: true
+    },
+    submittedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+}, {
+    timestamps: true,
+    toJSON: {
+        virtuals: true,
+        transform: (doc, ret) => {
+            delete ret._id;
+            delete ret.__v;
+            return ret;
+        }
+    }
+});
+
 const formSchema = new mongoose.Schema({
     name: { 
         type: String,
@@ -20,7 +41,16 @@ const formSchema = new mongoose.Schema({
           },
           message: props => `${props.value} is not a valid URL`
         }
-    }
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    sharedWith: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    submissions: [submissionsSchema],
 }, {
     timestamps: true,
     toJSON: {
