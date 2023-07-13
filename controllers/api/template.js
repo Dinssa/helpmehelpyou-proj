@@ -26,6 +26,7 @@ async function create(req, res) {
 async function index(req, res) {
     try{
         const templates = await Template.find({});
+        if (!template) throw new Error('No templates found');
 
         return res.json(templates);
     } catch (err) {
@@ -37,6 +38,7 @@ async function index(req, res) {
 async function userIndex(req, res) {
     try{
         const templates = await Template.find({user: req.user._id});
+        if (!template) throw new Error('No templates found');
 
         return res.json(templates);
     } catch (err) {
@@ -48,6 +50,7 @@ async function userIndex(req, res) {
 async function defaultIndex(req, res) {
     try{
         const templates = await Template.find({type: 'default'});
+        if (!template) throw new Error('No default templates found');
         return res.json(templates);
     } catch (err) {
         return res.status(err.code || 401).json(err);
@@ -58,6 +61,7 @@ async function defaultIndex(req, res) {
 async function show(req, res) {
     try{
         const template = await Template.findById(req.params.id);
+        if (!template) throw new Error('Template not found');
 
         return res.json(template);
     } catch (err) {
@@ -74,6 +78,7 @@ async function search(req, res) {
                 {desc: {$regex: req.params.searchQuery, $options: 'i'}}
             ]
         });
+        if (!template) throw new Error('Template not found');
         return res.json(templates);
     } catch (err) {
         return res.status(err.code || 401).json(err);

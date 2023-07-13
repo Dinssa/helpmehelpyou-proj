@@ -15,6 +15,7 @@ module.exports = {
 async function create(req, res) {
     try{
         const form = await Form.create(req.body);
+        if (!form) throw new Error('Form not created');
 
         return res.json(form);
     } catch (err) {
@@ -26,6 +27,7 @@ async function create(req, res) {
 async function index(req, res) {
     try{
         const forms = await Form.find({});
+        if (!forms) throw new Error('No forms found');
 
         return res.json(forms);
     } catch (err) {
@@ -37,6 +39,7 @@ async function index(req, res) {
 async function userIndex(req, res) {
     try{
         const forms = await Form.find({sharedWith: req.user._id});
+        if (!forms) throw new Error('No forms found');
 
         return res.json(forms);
     } catch (err) {
@@ -48,6 +51,7 @@ async function userIndex(req, res) {
 async function userIndexNonArchived(req, res) {
     try{
         const forms = await Form.find({sharedWith: req.user._id, archived: false});
+        if (!forms) throw new Error('No forms found');
 
         return res.json(forms);
     } catch (err) {
@@ -59,6 +63,7 @@ async function userIndexNonArchived(req, res) {
 async function userIndexArchived(req, res) {
     try{
         const forms = await Form.find({sharedWith: req.user._id, archived: true});
+        if (!forms) throw new Error('No forms found');
 
         return res.json(forms);
     } catch (err) {
@@ -70,6 +75,7 @@ async function userIndexArchived(req, res) {
 async function show(req, res) {
     try{
         const form = await Form.findById(req.params.id);
+        if (!form) throw new Error('Form not found');
 
         return res.json(form);
     } catch (err) {

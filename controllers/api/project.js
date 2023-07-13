@@ -19,10 +19,10 @@ module.exports = {
     clone
 };
 
-// Create a project
 async function create(req, res) {
     try{
         const project = await Project.create(req.body);
+        if (!project) throw new Error('Project not created');
 
         return res.json(project);
     } catch (err) {
@@ -35,6 +35,7 @@ async function create(req, res) {
 async function index(req, res) {
     try{
         const projects = await Project.find({});
+        if (!projects) throw new Error('No projects found');
 
         return res.json(projects);
     } catch (err) {
@@ -46,6 +47,7 @@ async function index(req, res) {
 async function userIndex(req, res) {
     try{
         const projects = await Project.find({user: req.user._id});
+        if (!projects) throw new Error('No projects found');
 
         return res.json(projects);
     } catch (err) {
@@ -57,6 +59,7 @@ async function userIndex(req, res) {
 async function userIndexNonArchived(req, res) {
     try{
         const projects = await Project.find({user: req.user._id, archived: false});
+        if (!projects) throw new Error('No projects found');
 
         return res.json(projects);
     } catch (err) {
@@ -68,6 +71,7 @@ async function userIndexNonArchived(req, res) {
 async function userIndexArchived(req, res) {
     try{
         const projects = await Project.find({user: req.user._id, archived: true});
+        if (!projects) throw new Error('No projects found');
 
         return res.json(projects);
     } catch (err) {
@@ -79,7 +83,7 @@ async function userIndexArchived(req, res) {
 async function show(req, res) {
     try{
         const project = await Project.findById(req.params.id);
-
+        if (!project) throw new Error('Project not found');
         return res.json(project);
     } catch (err) {
         return res.status(err.code || 401).json(err);
@@ -93,6 +97,7 @@ async function search(req, res) {
             $or: [{name: {$regex: req.params.query, $options: 'i'}}, 
             {description: {$regex: req.params.query, $options: 'i'}}]
         });
+        if (!projects) throw new Error('Project not found');
 
         return res.json(projects);
     } catch (err) {
@@ -131,6 +136,7 @@ async function addForm(req, res) {
         const project = await Project.findById(req.params.id);
         if (!project) throw new Error('Project not found');
         const template = await Template.findById(req.params.templateId);
+        if (!template) throw new Error('Template not found');
         const form = await Form.create({
             name: template.name, 
             fields: template.fields
