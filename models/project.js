@@ -79,7 +79,10 @@ const projectSchema = new mongoose.Schema({
           message: props => `${props.value} is not a valid url.`
         }
     },
-    archived: Boolean,
+    archived: {
+      type: Boolean,
+      default: false,
+    },
 }, {
     timestamps: true,
     toJSON: {
