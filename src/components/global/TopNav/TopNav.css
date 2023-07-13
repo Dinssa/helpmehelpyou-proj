@@ -8,7 +8,7 @@
     color: #ffffff;
 }
 
-.NavItem > a{
+.NavItem > a {
     text-decoration: none;
     color: #ffffff;
     font-size: 1.2rem;
@@ -61,6 +61,15 @@ button.navbar-toggler.collapsed{
     color: var(--third)
 }
 
+.dropdown-item > a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.dropdown-item > a:hover {
+    color: var(--third);
+}
+
 .dropdown-menu[data-bs-popper] {
     left: unset;
 }
@@ -68,6 +77,7 @@ button.navbar-toggler.collapsed{
 #dropdown-btn{
     border: none;
     color: #ffffff;
+    scale: 1.5;
 }
 
 #dropdown-btn:hover{

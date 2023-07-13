@@ -24,11 +24,13 @@ export default function TopNav({user, setUser}) {
             </Navbar.Brand>
             { user && (
             <Nav className="ms-auto me-2 d-flex flex-row">
-                <Nav.Link href="#">
-                    <li className="NavItem">
-                        <Link to="#"><i className="fa-solid fa-bell"></i></Link>
-                    </li>
-                </Nav.Link>
+                    <Nav.Link href="#">
+                        <li className="NavItem">
+                        <Link to="#">
+                            <i className="fa-solid fa-bell"></i>
+                        </Link>
+                        </li>
+                    </Nav.Link>
             </Nav>
             )}
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -82,9 +84,30 @@ export default function TopNav({user, setUser}) {
                                             <Dropdown.Toggle variant="" id="dropdown-btn">
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                                                <Dropdown.Item href="/settings">Settings</Dropdown.Item>
-                                                <Dropdown.Item href="" onClick={handleLogOut}>Sign Out</Dropdown.Item>
+                                                <Dropdown.Item href="">
+                                                    <NavLink to="/profile" activeClassName="active">
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <span>Profile</span>
+                                                        <i class="fa-regular fa-address-card"></i>
+                                                    </div>
+                                                    </NavLink>
+                                                </Dropdown.Item>
+                                                <Dropdown.Item href="">
+                                                    <NavLink to="/settings" activeClassName="active">
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <span>Settings</span>
+                                                        <i class="fa-solid fa-gear"></i>
+                                                    </div>
+                                                    </NavLink>
+                                                </Dropdown.Item>
+                                                <Dropdown.Item href="">
+                                                    <NavLink to="#signout" activeClassName="active" onClick={handleLogOut}>
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <span>Sign Out</span>
+                                                        <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                                                    </div>
+                                                    </NavLink>
+                                                </Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </div>
