@@ -18,31 +18,29 @@ const templateController = require('../../controllers/api/template');
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Template'
+ *             $ref: '#/components/schemas/TemplateInput'
  *     responses:
- *       '201':
+ *       '200':
  *         description: Created a new template
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Template'
- *       '400':
- *         description: Invalid request body
- *       '401':
+ *       '404':
  *         description: Unauthorized
  */
-router.post('/templates', ensureLoggedIn, templateController.create);
+router.post('/', ensureLoggedIn, templateController.create);
 
 /**
  * @swagger
- * /api/templates:
+ * /api/templates/all:
  *   get:
+ *     security:
+ *       - Bearer: []
  *     summary: Get all templates
  *     description: Retrieves all templates.
  *     tags:
  *       - Templates
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       '200':
  *         description: A list of templates.
@@ -52,10 +50,42 @@ router.post('/templates', ensureLoggedIn, templateController.create);
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Template'
- *       '401':
+ *       '404':
  *         description: Unauthorized
  */
-router.get('/templates', templateController.index);
+router.get('/all', templateController.index);
+
+/**
+ * @swagger
+ * /api/templates/all:
+ *   delete:
+ *     summary: Delete all templates
+ *     description: Deletes all templates.
+ *     tags:
+ *       - Templates
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Templates deleted successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               acknowledged: true
+ *               deletedCount: 2
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 acknowledged:
+ *                   type: boolean
+ *                   description: Indicates whether the operation was acknowledged by the server.
+ *                 deletedCount:
+ *                   type: number
+ *                   description: The number of templates that were deleted from the database.
+ *       '404':
+ *         description: Cannot find templates to delete.
+ */
+router.delete('/all', ensureLoggedIn, templateController.deleteAll);
 
 /**
  * @swagger
@@ -76,12 +106,42 @@ router.get('/templates', templateController.index);
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Template'
+ *       '404':
+ *         description: No templates found.
+ */
+router.get('/user', ensureLoggedIn, templateController.userIndex);
+
+/**
+ * @swagger
+ * /api/templates/deleteall:
+ *   delete:
+ *     summary: Delete all user templates
+ *     description: Deletes all templates belonging to the authenticated user.
+ *     tags:
+ *       - Templates
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: User templates deleted successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               acknowledged: true
+ *               deletedCount: 5
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 acknowledged:
+ *                   type: boolean
+ *                   description: Indicates whether the operation was acknowledged by the server.
+ *                 deletedCount:
+ *                   type: number
+ *                   description: The number of templates that were deleted.
  *       '401':
  *         description: Unauthorized
- *       '404':
- *         description: No templates found
  */
-router.get('/templates/user', ensureLoggedIn, templateController.userIndex);
+router.delete('/user', ensureLoggedIn, templateController.userDeleteAll);
 
 /**
  * @swagger
@@ -100,10 +160,39 @@ router.get('/templates/user', ensureLoggedIn, templateController.userIndex);
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Template'
- *      '404':
- *        description: No default templates found
+ *       '404':
+ *         description: No default templates found.
  */
-router.get('/templates/default', templateController.defaultIndex);
+router.get('/default', templateController.defaultIndex);
+
+/**
+ * @swagger
+ * /api/templates/search:
+ *   get:
+ *     security:
+ *       - Bearer: []
+ *     summary: Search for templates by name or description
+ *     description: Searches for templates by name or description.
+ *     tags:
+ *       - Templates
+ *     parameters:
+ *       - in: query
+ *         name: searchQuery
+ *         required: true
+ *         description: The search query to use.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: A list of templates matching the search query.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Template'
+ */
+router.get('/search', templateController.search);
 
 /**
  * @swagger
@@ -130,7 +219,7 @@ router.get('/templates/default', templateController.defaultIndex);
  *       '404':
  *         description: Template not found.
  */
-router.get('/templates/:id', templateController.show);
+router.get('/:id', templateController.show);
 
 /**
  * @swagger
@@ -154,7 +243,7 @@ router.get('/templates/:id', templateController.show);
  *         description: The template to update.
  *         required: true
  *         schema:
- *           $ref: '#/components/schemas/Template'
+ *           $ref: '#/components/schemas/TemplateInput'
  *     responses:
  *       '200':
  *         description: The updated template.
@@ -162,12 +251,12 @@ router.get('/templates/:id', templateController.show);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Template'
- *       '401':
- *         description: Unauthorized
  *       '404':
  *         description: Template not found.
  */
-router.put('/templates/:id', ensureLoggedIn, templateController.update);
+router.put('/:id', ensureLoggedIn, templateController.update);
+
+
 
 /**
  * @swagger
@@ -187,39 +276,26 @@ router.put('/templates/:id', ensureLoggedIn, templateController.update);
  *         schema:
  *           type: string
  *     responses:
- *       '204':
+ *       '200':
  *         description: Template deleted successfully.
- *       '401':
- *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             example:
+ *               acknowledged: true
+ *               deletedCount: 1
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 acknowledged:
+ *                   type: boolean
+ *                   description: Indicates whether the operation was acknowledged by the server.
+ *                 deletedCount:
+ *                   type: number
+ *                   description: The number of templates that were deleted.
  *       '404':
  *         description: Template not found.
  */
-router.delete('/templates/:id', ensureLoggedIn, templateController.delete);
+router.delete('/:id', ensureLoggedIn, templateController.delete);
 
-/**
- * @swagger
- * /api/templates/search/{searchQuery}:
- *   get:
- *     summary: Search for templates by name or description
- *     description: Searches for templates by name or description.
- *     tags:
- *       - Templates
- *     parameters:
- *       - in: path
- *         name: searchQuery
- *         required: true
- *         description: The search query to use.
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: A list of templates matching the search query.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Template'
- */router.get('/templates/search/:searchQuery', templateController.search);
 
 module.exports = router;
