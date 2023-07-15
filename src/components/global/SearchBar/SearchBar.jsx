@@ -1,16 +1,32 @@
 import './SearchBar.css'
-import { Form, FormControl, Button } from 'react-bootstrap';
+import { Form, FormControl, InputGroup } from 'react-bootstrap';
 
-export default function SearchBar({searchQuery, setSearchQuery}){
-    return (
-        <Form className="d-flex">
-          <FormControl
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-          />
-          <Button variant="outline-success">Search</Button>
-        </Form>
-      )
+export default function SearchBar({searchQuery, setSearchQuery, searchPlaceholder="Search"}){
+
+  function handleChanges(e){
+    console.log(e.target.value)
+    setSearchQuery(e.target.value)
+  }
+
+  function handleOnSubmit(e){
+    e.preventDefault()
+  }
+
+  return (
+      <main className="SearchBar">
+          <Form className="search d-flex" onSubmit={handleOnSubmit}>
+            <InputGroup>
+              <InputGroup.Text id="search-icon"><i className="fa-solid fa-magnifying-glass"></i></InputGroup.Text>
+              <FormControl
+                type="search"
+                placeholder={searchPlaceholder}
+                className="me-2 search-input"
+                aria-label="Search"
+                value={searchQuery}
+                onChange={handleChanges}
+              />
+            </InputGroup>
+          </Form>
+      </main>
+    )
 }
