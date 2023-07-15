@@ -88,7 +88,7 @@ export default function TopNav({user, setUser}) {
                                                     <NavLink to="/profile" activeClassName="active">
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <span>Profile</span>
-                                                        <i class="fa-regular fa-address-card"></i>
+                                                        <i className="fa-regular fa-address-card"></i>
                                                     </div>
                                                     </NavLink>
                                                 </Dropdown.Item>
@@ -96,7 +96,7 @@ export default function TopNav({user, setUser}) {
                                                     <NavLink to="/settings" activeClassName="active">
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <span>Settings</span>
-                                                        <i class="fa-solid fa-gear"></i>
+                                                        <i className="fa-solid fa-gear"></i>
                                                     </div>
                                                     </NavLink>
                                                 </Dropdown.Item>
@@ -104,7 +104,7 @@ export default function TopNav({user, setUser}) {
                                                     <NavLink to="#signout" activeClassName="active" onClick={handleLogOut}>
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <span>Sign Out</span>
-                                                        <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                                                        <i className="fa-sharp fa-solid fa-right-from-bracket"></i>
                                                     </div>
                                                     </NavLink>
                                                 </Dropdown.Item>
