@@ -40,6 +40,7 @@ function App() {
           <Route path="/forms" element={<FormsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/api" element={<iframe src="http://localhost:3001/api" style={{ width: '100%', height: '100%' }} />} />
           <Route path="/404" element={<PageNotFound />} />
           <Route path="/auth" element={<Navigate to="/" />} />
           <Route path="*" element={<Navigate to="/404" />} />

@@ -74,3 +74,7 @@ code {
 .tooltip::before {
   border-top-color: #333;
 }
+
+main{
+  height: calc(100% - 7rem);
+}
