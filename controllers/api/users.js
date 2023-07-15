@@ -22,7 +22,7 @@ async function create(req, res) {
         if (err.code === 11000) {
             return res.status(400).json({ error: 'Email address already in use' });
         }
-        return res.status(err.code || 401).json(err);
+        return res.status(404).json(err);
     }
 }
 
@@ -34,7 +34,7 @@ async function update(req, res) {
         await user.save();
         return res.json(user);
     } catch (err) {
-        return res.status(err.code || 401).json(err);
+        return res.status(401).json(err);
     }
 }
 
@@ -54,7 +54,7 @@ async function login(req, res) {
         if (!match) throw new Error();
         res.json(createJWT(user));
     } catch (err) {
-        return res.status(err.code || 401).json(err);
+        return res.status(401).json(err);
     }
 }
 

@@ -23,14 +23,10 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *       400:
- *        description: Bad request. Invalid request body.
- *       401:
- *         description: Unauthorised. Invalid credentials.
+ *               type: string
+ *               example: token
+ *       404:
+ *         description: Invalid credentials.
  */
 router.post('/', usersCtrl.create);
 
@@ -68,11 +64,8 @@ router.post('/', usersCtrl.create);
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: The error message
+ *               type: string
+ *               example: Unauthorized
  */
 router.post('/login', usersCtrl.login);
 
@@ -101,11 +94,8 @@ router.post('/login', usersCtrl.login);
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: The error message
+ *               type: string
+ *               example: Unauthorized
  */
 router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
 
