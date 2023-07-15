@@ -7,6 +7,10 @@ const projectSchema = new mongoose.Schema({
         maxLength: 90,
         trim: true
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     desc: { 
         type: String,
         maxLength: 200,

@@ -29,6 +29,10 @@ const formSchema = new mongoose.Schema({
         maxLength: 70,
         trim: true
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     fields: {
         type: [mongoose.Schema.Types.Mixed],
         required: true
@@ -68,7 +72,7 @@ formSchema.virtual('archived').get(function() {
 });
 
 formSchema.virtual('shortUrl').get(function() {
-    return `forms/${this.uuid}`;
+    return `${process.env.SHORT_URL}/form/${this.uuid}`;
 });
 
 module.exports = mongoose.model('Form', formSchema);
