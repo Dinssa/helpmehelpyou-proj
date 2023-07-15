@@ -20,7 +20,7 @@ const projectController = require('../../controllers/api/project');
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Project'
+ *             $ref: '#/components/schemas/ProjectInput'
  *     responses:
  *       '200':
  *         description: The created project.
@@ -31,7 +31,201 @@ const projectController = require('../../controllers/api/project');
  *       '401':
  *         description: Unauthorized
  */
-router.post('/projects', ensureLoggedIn, projectController.create);
+router.post('/', ensureLoggedIn, projectController.create);
+
+/**
+ * @swagger
+ * /api/projects/all:
+ *   get:
+ *     summary: Get all projects
+ *     description: Retrieves all projects.
+ *     tags:
+ *       - Projects
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: All projects.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Project'
+ *       '401':
+ *         description: Unauthorized
+ *       '404':
+ *         description: No projects found.
+ */
+router.get('/all', ensureLoggedIn, projectController.index);
+
+/**
+ * @swagger
+ * /api/projects/all:
+ *   delete:
+ *     summary: Delete all projects
+ *     description: Deletes all projects.
+ *     tags:
+ *       - Projects
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Projects deleted successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               acknowledged: true
+ *               deletedCount: 13
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 acknowledged:
+ *                   type: boolean
+ *                   description: Indicates whether the operation was acknowledged by the server.
+ *                 deletedCount:
+ *                   type: number
+ *                   description: The number of projects that were deleted.
+ *       '401':
+ *         description: Unauthorized
+ */
+router.delete('/all', ensureLoggedIn, projectController.deleteAll);
+
+/**
+ * @swagger
+ * /api/projects/user:
+ *   get:
+ *     summary: Get all projects that belong to the user
+ *     description: Retrieves all projects that belong to the authenticated user.
+ *     tags:
+ *       - Projects
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: All projects that belong to the user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Project'
+ *       '401':
+ *         description: Unauthorized
+ *       '404':
+ *         description: No projects found.
+ */
+router.get('/user', ensureLoggedIn, projectController.userIndex);
+
+/**
+ * @swagger
+ * /api/projects/user/nonarchived:
+ *   get:
+ *     summary: Get all non-archived projects that belong to the user
+ *     description: Retrieves all non-archived projects that belong to the authenticated user.
+ *     tags:
+ *       - Projects
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: All non-archived projects that belong to the user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Project'
+ *       '401':
+ *         description: Unauthorized
+ */
+router.get('/user/nonarchived', ensureLoggedIn, projectController.userIndexNonArchived);
+
+/**
+ * @swagger
+ * /api/projects/user/archived:
+ *   get:
+ *     summary: Get all archived projects that belong to the user
+ *     description: Retrieves all archived projects that belong to the authenticated user.
+ *     tags:
+ *       - Projects
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: All archived projects that belong to the user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Project'
+ *       '401':
+ *         description: Unauthorized
+ */
+router.get('/user/archived', ensureLoggedIn, projectController.userIndexArchived);
+
+/**
+ * @swagger
+ * /api/projects/user:
+ *   delete:
+ *     summary: Delete all user owned projects
+ *     description: Deletes all projects owned by the authenticated user.
+ *     tags:
+ *       - Projects
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Projects deleted successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               acknowledged: true
+ *               deletedCount: 10
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 acknowledged:
+ *                   type: boolean
+ *                   description: Indicates whether the operation was acknowledged by the server.
+ *                 deletedCount:
+ *                   type: number
+ *                   description: The number of projects that were deleted.
+ *       '401':
+ *         description: Unauthorized
+ */
+router.delete('/user', ensureLoggedIn, projectController.userDeleteAll);
+
+/**
+ * @swagger
+ * /api/projects/search:
+ *   get:
+ *     summary: Search for projects by name or description
+ *     description: Searches for projects that match the specified search query in their name or description.
+ *     tags:
+ *       - Projects
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: searchQuery
+ *         schema:
+ *           type: string
+ *         description: The search query to match against project names and descriptions.
+ *     responses:
+ *       '200':
+ *         description: Projects that match the search query.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Project'
+ *       '401':
+ *          description: Unauthorized
+ */
+router.get('/search', ensureLoggedIn, projectController.search);
 
 /**
  * @swagger
@@ -62,7 +256,7 @@ router.post('/projects', ensureLoggedIn, projectController.create);
  *       '404':
  *         description: Project not found.
  */
-router.get('/projects/:id', ensureLoggedIn, projectController.show);
+router.get('/:id', ensureLoggedIn, projectController.show);
 
 /**
  * @swagger
@@ -100,7 +294,7 @@ router.get('/projects/:id', ensureLoggedIn, projectController.show);
  *       '404':
  *         description: Project not found.
  */
-router.put('/projects/:id', ensureLoggedIn, projectController.update);
+router.put('/:id', ensureLoggedIn, projectController.update);
 
 /**
  * @swagger
@@ -127,141 +321,11 @@ router.put('/projects/:id', ensureLoggedIn, projectController.update);
  *       '404':
  *         description: Project not found.
  */
-router.delete('/projects/:id', ensureLoggedIn, projectController.delete);
+router.delete('/:id', ensureLoggedIn, projectController.delete);
 
 /**
  * @swagger
- * /api/projects:
- *   get:
- *     summary: Get all projects
- *     description: Retrieves all projects.
- *     tags:
- *       - Projects
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       '200':
- *         description: All projects.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Project'
- *       '401':
- *         description: Unauthorized
- *       '404':
- *         description: No projects found.
- */
-router.get('/projects', ensureLoggedIn, projectController.index);
-
-/**
- * @swagger
- * /api/projects/user:
- *   get:
- *     summary: Get all projects that belong to the user
- *     description: Retrieves all projects that belong to the authenticated user.
- *     tags:
- *       - Projects
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       '200':
- *         description: All projects that belong to the user.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Project'
- *       '401':
- *         description: Unauthorized
- *       '404':
- *         description: No projects found.
- */
-router.get('/projects/user', ensureLoggedIn, projectController.userIndex);
-
-/**
- * @swagger
- * /api/projects/user/nonarchived:
- *   get:
- *     summary: Get all non-archived projects that belong to the user
- *     description: Retrieves all non-archived projects that belong to the authenticated user.
- *     tags:
- *       - Projects
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       '200':
- *         description: All non-archived projects that belong to the user.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Project'
- *       '401':
- *         description: Unauthorized
- */
-router.get('/projects/user/nonarchived', ensureLoggedIn, projectController.userIndexNonArchived);
-
-/**
- * @swagger
- * /api/projects/user/archived:
- *   get:
- *     summary: Get all archived projects that belong to the user
- *     description: Retrieves all archived projects that belong to the authenticated user.
- *     tags:
- *       - Projects
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       '200':
- *         description: All archived projects that belong to the user.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Project'
- *       '401':
- *         description: Unauthorized
- */
-router.get('/projects/user/archived', ensureLoggedIn, projectController.userIndexArchived);
-
-/**
- * @swagger
- * /api/projects/search:
- *   get:
- *     summary: Search for projects by name or description
- *     description: Searches for projects that match the specified search query in their name or description.
- *     tags:
- *       - Projects
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: searchQuery
- *         schema:
- *           type: string
- *         description: The search query to match against project names and descriptions.
- *     responses:
- *       '200':
- *         description: Projects that match the search query.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Project'
- *       '401':
- *          description: Unauthorized
- */
-router.get('/projects/search/:searchQuery', ensureLoggedIn, projectController.search);
-
-/**
- * @swagger
- * /api/projects/{id}/forms:
+ * /api/projects/addform/{projectId}/{templateId}:
  *   post:
  *     summary: Add a form to a project
  *     description: Adds a form to the specified project.
@@ -271,19 +335,19 @@ router.get('/projects/search/:searchQuery', ensureLoggedIn, projectController.se
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: projectId
  *         schema:
  *           type: string
  *         required: true
  *         description: The ID of the project to add the form to.
  *       - in: path
- *         name: templatetId
+ *         name: templateId
  *         schema:
  *           type: string
  *         required: true
- *         description: The ID of the template to use to create the form to.
+ *         description: The ID of the template to use to create the form.
  *     responses:
- *       '201':
+ *       '200':
  *         description: The added form.
  *         content:
  *           application/json:
@@ -292,11 +356,11 @@ router.get('/projects/search/:searchQuery', ensureLoggedIn, projectController.se
  *       '401':
  *         description: Unauthorized
  */
-router.post('/projects/:id/addform/:templateId', ensureLoggedIn, projectController.addForm);
+router.post('/addform/:projectId/:templateId', ensureLoggedIn, projectController.addForm);
 
 /**
  * @swagger
- * /api/projects/{id}/forms/{formId}:
+ * /api/projects/deleteform/{projectId}/{formId}:
  *   delete:
  *     summary: Delete a form from a project
  *     description: Deletes the specified form from the specified project.
@@ -306,7 +370,7 @@ router.post('/projects/:id/addform/:templateId', ensureLoggedIn, projectControll
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: projectId
  *         schema:
  *           type: string
  *         required: true
@@ -319,15 +383,29 @@ router.post('/projects/:id/addform/:templateId', ensureLoggedIn, projectControll
  *         description: The ID of the form to delete.
  *     responses:
  *       '200':
- *         description: The form was successfully deleted.
+ *         description: Forms deleted successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               acknowledged: true
+ *               deletedCount: 1
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 acknowledged:
+ *                   type: boolean
+ *                   description: Indicates whether the operation was acknowledged by the server.
+ *                 deletedCount:
+ *                   type: number
+ *                   description: The number of forms that were deleted.
  *       '401':
  *         description: Unauthorized
  */
-router.delete('/projects/:id/deleteform/:formId', ensureLoggedIn, projectController.deleteForm);
+router.delete('/deleteform/:projectId/:formId', ensureLoggedIn, projectController.deleteForm);
 
 /**
  * @swagger
- * /api/projects/{id}/archive:
+ * /api/projects/archive/{id}:
  *   put:
  *     summary: Archive a project
  *     description: Archives the specified project.
@@ -352,11 +430,11 @@ router.delete('/projects/:id/deleteform/:formId', ensureLoggedIn, projectControl
  *       '401':
  *         description: Unauthorized
  */
-router.put('/projects/:id/archive', ensureLoggedIn, projectController.archive);
+router.put('/archive/:id', ensureLoggedIn, projectController.archive);
 
 /**
  * @swagger
- * /api/projects/{id}/unarchive:
+ * /api/projects/unarchive/{id}:
  *   put:
  *     summary: Unarchive a project
  *     description: Unarchives the specified project.
@@ -381,11 +459,11 @@ router.put('/projects/:id/archive', ensureLoggedIn, projectController.archive);
  *       '401':
  *         description: Unauthorized
  */
-router.put('/projects/:id/unarchive', ensureLoggedIn, projectController.unarchive);
+router.put('/unarchive/:id', ensureLoggedIn, projectController.unarchive);
 
 /**
  * @swagger
- * /api/projects/{id}/clone:
+ * /api/projects/clone/{id}:
  *   post:
  *     summary: Clone a project
  *     description: Clones the specified project by creating a new project with the same name, description, and forms.
@@ -410,6 +488,6 @@ router.put('/projects/:id/unarchive', ensureLoggedIn, projectController.unarchiv
  *       '401':
  *         description: Unauthorized
  */
-router.post('/projects/:id/clone', ensureLoggedIn, projectController.clone);
+router.post('/clone/:id', ensureLoggedIn, projectController.clone);
 
 module.exports = router;
