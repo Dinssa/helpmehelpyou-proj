@@ -6,10 +6,6 @@ const serverHost = process.env.SERVER_HOST;
 const port = process.env.SERVER_PORT;
 const serverUrl = `http://${serverHost}:${port}`;
 
-const userModel = require('../models/user');
-const projectModel = require('../models/project');
-const templateModel = require('../models/template');
-const formModel = require('../models/form');
 
 const options = {
   definition: {
@@ -19,9 +15,18 @@ const options = {
       version: '1.0.0',
       description: 'GA Project 4 - HelpMeHelpYou'
     },
-    servers: [
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'bearertoken'
+        }
+      }
+    },
+    securtiy: [
       {
-        url: serverUrl
+        bearerAuth: []
       }
     ],
     components: {
@@ -164,9 +169,139 @@ const options = {
                   updatedAt: {
                     type: 'string',
                     format: 'date-time'
-                  }
+                  },
+                  owner: {
+                    type: 'string',
+                    format: 'uuid'
+                  },
                 },
                 required: ['name', 'fields', 'type']
+            },
+            FormInput: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  maxLength: 70
+                },
+                fields: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      label: {
+                        type: 'string',
+                        maxLength: 70
+                      },
+                      type: {
+                        type: 'string',
+                        enum: ['text', 'number', 'email', 'date', 'checkbox', 'radio', 'select', 'textarea']
+                      },
+                      required: {
+                        type: 'boolean'
+                      },
+                      options: {
+                        type: 'array',
+                        items: {
+                          type: 'string'
+                        }
+                      }
+                    },
+                    required: ['label', 'type']
+                  }
+                }
+              },
+              required: ['name', 'fields']
+            },
+            ProjectInput: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string'
+                },
+                desc: {
+                  type: 'string'
+                },
+                forms: {
+                  type: 'array',
+                  items: {
+                    type: 'string'
+                  }
+                },
+                website: {
+                  type: 'string'
+                },
+                email: {
+                  type: 'string'
+                },
+                google_drive: {
+                  type: 'string'
+                },
+                facebook: {
+                  type: 'string'
+                },
+                instagram: {
+                  type: 'string'
+                },
+                twitter: {
+                  type: 'string'
+                },
+                other_link: {
+                  type: 'string'
+                },
+                archived: {
+                  type: 'boolean',
+                  default: false
+                }
+              },
+              required: ['name'],
+              additionalProperties: false
+            },
+            TemplateInput: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  required: true
+                },
+                desc: {
+                  type: 'string'
+                },
+                fields: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      label: {
+                        type: 'string',
+                        required: true
+                      },
+                      type: {
+                        type: 'string',
+                        enum: ['text', 'number', 'email', 'date', 'checkbox', 'radio', 'select', 'textarea'],
+                        required: true
+                      },
+                      required: {
+                        type: 'boolean'
+                      },
+                      options: {
+                        type: 'array',
+                        items: {
+                          type: 'string'
+                        }
+                      }
+                    },
+                    required: ['label', 'type']
+                  },
+                  required: true
+                },
+                type: {
+                  type: 'string',
+                  enum: ['default', 'user'],
+                  required: true
+                }
+              },
+              required: ['name', 'fields', 'type']
             }
         }
     }
