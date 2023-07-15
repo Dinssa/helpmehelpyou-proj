@@ -1,5 +1,3 @@
-// In this service file, 
-
 import * as usersAPI from './users-api';
 
 export async function login(credentials) {

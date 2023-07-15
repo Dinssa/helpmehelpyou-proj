@@ -22,9 +22,6 @@ app.use(require('./config/checkToken'));
 
 // * API routes
 // Route prefix of /api for all of our routes
-
-
-
 app.use('/api/users', require('./routes/api/users')); // API routes for users
 app.use('/api/projects', require('./routes/api/projects')); // API routes for projects
 app.use('/api/templates', require('./routes/api/templates')); // API routes for templates
