@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 // API
 import { getTemplate } from '../../utilities/templates-service';
 
+// Components
+import TemplateViewer from '../../components/Template/TemplateViewer';
+
 export default function TemplateViewPage(){
     const query = new URLSearchParams(window.location.search);
 
@@ -29,10 +32,10 @@ export default function TemplateViewPage(){
 
     return (
     <div>
-        <h1>Template View</h1>
-        <p>Template ID: {query.get('q')}</p>
-        <p>Template Name: {template.name}</p>
-        <p>Template Description: {template.desc}</p>
+        <h1>{template.name}</h1>
+        <p className='text-muted small'> {query.get('q')}</p>
+        <p>Description: {template.desc}</p>
+        <TemplateViewer fields={fields} />
     </div>
     )
 }
