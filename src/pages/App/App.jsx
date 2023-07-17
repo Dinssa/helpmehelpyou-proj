@@ -18,6 +18,8 @@ import PageNotFound from '../Misc/PageNotFound';
 // Main App
 import ProjectsPage from '../Project/ProjectsPage';
 import TemplatesPage from '../Template/TemplatesPage';
+import TemplateEditorPage from '../Template/TemplateEditorPage';
+import TemplateViewPage from '../Template/TemplateViewPage';
 import FormsPage from '../Form/FormsPage';
 import ProfilePage from '../Account/ProfilePage';
 import SettingsPage from '../Account/SettingsPage';
@@ -37,6 +39,8 @@ function App() {
           <Route path="/freelancers" element={<FreelancersPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/templates" element={<TemplatesPage />} />
+          <Route path="/template/editor" element={<TemplateEditorPage />} />
+          <Route path="/template" element={<TemplateViewPage />} />
           <Route path="/forms" element={<FormsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
@@ -52,6 +56,8 @@ function App() {
           <Route path="/freelancers" element={<FreelancersPage />} />
           <Route path="/auth" element={<AuthPage setUser={setUser} />} />
           <Route path="/404" element={<PageNotFound />} />
+          <Route path="/template/editor" element={<Navigate to="/" />} />
+          <Route path="/template" element={<Navigate to="/" />} />
           <Route path="/forms" element={<Navigate to="/" />} />
           <Route path="/profile" element={<Navigate to="/" />} />
           <Route path="/settings" element={<Navigate to="/" />} />

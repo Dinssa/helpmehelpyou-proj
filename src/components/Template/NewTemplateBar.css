@@ -1,3 +1,8 @@
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .NewTemplateBar{
     padding: 0 10px;
 }
@@ -34,7 +39,7 @@
     white-space: nowrap;
 }
 
-.defaultTemplates > ul > li {
+.defaultTemplates > ul > a > li {
     min-width: 120px;
     max-width: 120px;
     height: 140px;
@@ -70,7 +75,7 @@
     color: var(--fourth);
 }
 
-.defaultTemplates > ul > li:first-of-type{
+.defaultTemplates > ul > a:first-of-type > li{
     margin-left: 10px;
 }
 

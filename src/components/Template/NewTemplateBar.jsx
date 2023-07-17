@@ -1,5 +1,6 @@
 import './NewTemplateBar.css'
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { defaultIndex } from '../../utilities/templates-service';
 
@@ -20,17 +21,21 @@ export default function NewTemplateBar(){
         <div className='NewTemplateBar'>
              <div className="TemplateBar">
                 <h5>Create a new template</h5>
-                <div className='blank-template option'>
-                    <div>From Scratch</div>
-                    <div><i className="fa-regular fa-note-sticky"></i></div>
-                </div>
+                <Link to='/template/editor' className='link'>
+                    <div className='blank-template option'>
+                        <div>From Scratch</div>
+                        <div><i className="fa-regular fa-note-sticky"></i></div>
+                    </div>
+                </Link>
                 <div className='defaultTemplates'>
                     <ul>
                         {defaultTemplates.map((template, idx) =>
-                            <li key={idx} className='defaultTemplateOption option'>
-                                <div>{template.name}</div>
-                                <div><i className={template.icon}></i></div>
-                            </li>
+                            <Link key={template.id} to={`/template/editor?q=${template.id}`} className='link'>
+                                <li key={idx} className='defaultTemplateOption option'>
+                                    <div>{template.name}</div>
+                                    <div><i className={template.icon}></i></div>
+                                </li>
+                            </Link>
                         )}
                     </ul>
                 </div>

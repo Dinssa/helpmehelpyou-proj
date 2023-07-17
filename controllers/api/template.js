@@ -78,11 +78,11 @@ async function defaultIndex(req, res) {
 }
 
 // Show a template
-// GET /api/templates/show/:id
+// GET /api/templates/:id
 async function show(req, res) {
     try{
         const template = await Template.findById(req.params.id);
-        if (!template) throw new Error('Template not found');
+        if (!template) return res.json([]);
 
         return res.json(template);
     } catch (err) {
@@ -121,6 +121,7 @@ async function search(req, res) {
 } 
 
 // Update a template
+// PUT /api/templates/:id
 async function update(req, res) {
     try{
         const template = await Template.findById(req.params.id);
