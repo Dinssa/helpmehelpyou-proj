@@ -21,7 +21,7 @@ const templateSchema = new mongoose.Schema({
         enum: ['default', 'user'],
         required: true
     },
-    owner: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }

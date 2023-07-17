@@ -95,9 +95,11 @@ async function show(req, res) {
 async function search(req, res) {
     try{
         const decodedToken = decodeToken(req);
-        // Templates that belong to the user and match the search query
-        const templates = await Template.find({
-            $and: [
+        // Filter by user
+        let query = { user: decodedToken.user.id };
+        // Also filter by search query, if it exists
+        if (req.query.searchQuery) {
+            query.$and = [
                 {
                 $or: [
                     { name: { $regex: req.query.searchQuery, $options: 'i' } },
@@ -105,8 +107,9 @@ async function search(req, res) {
                 ]
                 },
                 { user: decodedToken.user.id }
-            ]
-        });
+            ];
+        }
+        const templates = await Template.find(query);
         if (!templates) throw new Error('Template not found');
         return res.json(templates);
     } catch (err) {
