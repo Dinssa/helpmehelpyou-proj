@@ -13,7 +13,7 @@ export default function SearchBar({searchQuery, setSearchQuery, searchPlaceholde
   }
 
   return (
-      <main className="SearchBar">
+      <div className="SearchBar">
           <Form className="search d-flex" onSubmit={handleOnSubmit}>
             <InputGroup>
               <InputGroup.Text id="search-icon"><i className="fa-solid fa-magnifying-glass"></i></InputGroup.Text>
@@ -27,6 +27,6 @@ export default function SearchBar({searchQuery, setSearchQuery, searchPlaceholde
               />
             </InputGroup>
           </Form>
-      </main>
+      </div>
     )
 }
