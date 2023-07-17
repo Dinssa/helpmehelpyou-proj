@@ -20,6 +20,11 @@ export async function searchTemplates(searchQuery) {
     return sendRequest(`${BASE_URL}/search`, 'GET', null, params);
 }
 
+// Get all default templates
+export async function defaultIndex() {
+    return sendRequest(`${BASE_URL}/default`);
+}
+
 // Get a single template
 export async function getTemplate(id) {
     return sendRequest(`${BASE_URL}/${id}`);

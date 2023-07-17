@@ -7,6 +7,7 @@ import { searchTemplates } from '../../utilities/templates-service';
 // Components
 import TemplateList from '../../components/Template/TemplateList';
 import SearchBar from '../../components/global/SearchBar/SearchBar';
+import NewTemplateBar from '../../components/Template/NewTemplateBar';
 
 export default function TemplatesPage(){
 
@@ -23,8 +24,8 @@ export default function TemplatesPage(){
 
     return (
         <main className="TemplatesPage">
-            <h1>TemplatesPage</h1>
             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your templates' />
+            <NewTemplateBar />
             <TemplateList templates={templates} />
         </main>
     )

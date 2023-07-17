@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 defaultIcons = [
     'fa-solid fa-leaf',
-    'fa-solid fa-seeding',
+    'fa-solid fa-seedling',
 ];
 
 const templateSchema = new mongoose.Schema({

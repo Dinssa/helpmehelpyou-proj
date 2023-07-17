@@ -20,7 +20,7 @@ export default function SearchBar({searchQuery, setSearchQuery, searchPlaceholde
               <FormControl
                 type="search"
                 placeholder={searchPlaceholder}
-                className="me-2 search-input"
+                className="search-input"
                 aria-label="Search"
                 value={searchQuery}
                 onChange={handleChanges}

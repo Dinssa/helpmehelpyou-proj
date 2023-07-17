@@ -256,8 +256,6 @@ router.get('/:id', templateController.show);
  */
 router.put('/:id', ensureLoggedIn, templateController.update);
 
-
-
 /**
  * @swagger
  * /api/templates/{id}:

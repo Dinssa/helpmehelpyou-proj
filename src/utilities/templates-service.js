@@ -19,3 +19,11 @@ export async function getTemplate(id) {
 export async function updateTemplate(id, templateData) {
     return templateAPI.updateTemplate(id, templateData);
 }
+
+export async function deleteTemplate(id) {
+    return templateAPI.deleteTemplate(id);
+}
+
+export async function defaultIndex() {
+    return templateAPI.defaultIndex();
+}
