@@ -100,14 +100,17 @@ async function search(req, res) {
         // Also filter by search query, if it exists
         if (req.query.searchQuery) {
             query.$and = [
-                {
+              {
                 $or: [
-                    { name: { $regex: req.query.searchQuery, $options: 'i' } },
-                    { desc: { $regex: req.query.searchQuery, $options: 'i' } }
+                  { name: { $regex: req.query.searchQuery, $options: 'i' } },
+                  { desc: { $regex: req.query.searchQuery, $options: 'i' } }
                 ]
-                },
-                { user: decodedToken.user.id }
+              },
+              { user: decodedToken.user.id },
+              { type: { $ne: 'default' } } // exclude templates where type is "default"
             ];
+        } else {
+        query.type = { $ne: 'default' };
         }
         const templates = await Template.find(query);
         if (!templates) throw new Error('Template not found');
