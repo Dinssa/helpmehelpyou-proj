@@ -2,6 +2,8 @@ import './TemplateEditorPage.css'
 
 import { useState, useEffect } from 'react';
 
+import TemplateEditor from '../../components/Template/TemplateEditor';
+
 // API
 import { getTemplate, updateTemplate, deleteTemplate } from '../../utilities/templates-service';
 
@@ -43,6 +45,7 @@ export default function TemplateEditorPage(){
         <p>Template ID: {query.get('q')}</p>
         <p>Template Name: {template.name}</p>
         <p>Template Description: {template.desc}</p>
+        <TemplateEditor fields={fields} />
     </div>
     )
 }
