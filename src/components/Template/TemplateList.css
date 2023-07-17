@@ -1,0 +1,49 @@
+.TemplateList{
+    margin-top: 30px;
+}
+
+.TemplateList > ul{
+    list-style: none;
+    padding: 0;
+    margin: 0 10px;
+    padding-bottom: 30px;
+}
+
+.TemplateList-template{
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-template-rows: 1fr auto;
+    margin: 5px 0;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.TemplateList-icon{
+    grid-row: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 2rem;
+    color: var(--fourth);
+}
+
+.TemplateList-template-name, .TemplateList-template-description{
+    text-align: left;
+}
+
+.TemplateList-template-name{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.TemplateList-template-description{
+    font-size: 1rem;
+    color: var(--secondary);
+}
+
+.TemplateList-template:hover{
+    background-color: var(--light);
+    color: var(--fourth);
+}
