@@ -1,11 +1,22 @@
 const mongoose = require('mongoose');
 
+defaultIcons = [
+    'fa-solid fa-leaf',
+    'fa-solid fa-seeding',
+];
+
 const templateSchema = new mongoose.Schema({
     name: { 
         type: String,
         required: true,
         maxLength: 70,
         trim: true
+    },
+    icon: {
+        type: String,
+        default: function() {
+            return defaultIcons[Math.floor(Math.random() * defaultIcons.length)];
+        }
     },
     desc: {
         type: String,
