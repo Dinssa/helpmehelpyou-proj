@@ -1,0 +1,62 @@
+.NullProjectDetail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 85vh;
+    width: 100%;
+    font-size: 2rem;
+    color: var(--third);
+    font-weight: 600;
+    background-color: var(--light);
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.ProjectDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    padding: 10px;
+}
+
+hr{
+    width: 100%;
+    border: 1px solid var(--secondary);
+}
+
+.ProjectDetail-forms{
+    width: 100%;
+}
+
+.ProjectDetail-forms-header{
+    width: 100%;
+}
+
+.ProjectDetail-header-name{
+    text-align: left;
+}
+
+.ProjectDetail-header-actions{
+    text-align: left;
+}
+
+.ProjectDetail-header-actions > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ProjectDetail-header-actions > ul > li{
+    display: inline-block;
+    margin: 0 6px;
+    font-size: 1.7rem;
+}
+
+.ProjectDetail-header-actions > ul > a{
+    text-decoration: none;
+    color: var(--secondary);
+}
