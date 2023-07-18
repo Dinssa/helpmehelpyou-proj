@@ -5,6 +5,8 @@ import { Button } from 'react-bootstrap';
 
 export default function ProjectList({projects, handleProjectSelect}){
 
+    if (!projects) return null;
+
     return (
         <div className='ProjectList'>
             <ul>

@@ -44,12 +44,12 @@ export default function ProjectDetail({project}){
                 <div className='ProjectDetail-header-name'><h1>{project.name}</h1></div>
                 <div className='ProjectDetail-header-actions'>
                     <ul>
-                        { project.links.website && <li><a href={project.links.website} target='_blank' rel='noreferrer' className='link-third'><i class="fa-solid fa-globe"></i></a></li>}
-                        { project.links.google_drive && <li><a href={project.links.google_drive} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-google-drive"></i></a></li>}
-                        { project.links.facebook && <li><a href={project.links.facebook} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-facebook"></i></a></li>}
-                        { project.links.instagram && <li><a href={project.links.instagram} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-instagram"></i></a></li>}
-                        { project.links.twitter && <li><a href={project.links.twitter} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-twitter"></i></a></li>}
-                        { project.links.other_link && <li><a href={project.links.other_link} target='_blank' rel='noreferrer' className='link-third'><i class="fa-solid fa-link"></i></a></li>}
+                        { project.links?.website && <li><a href={project.links.website} target='_blank' rel='noreferrer' className='link-third'><i class="fa-solid fa-globe"></i></a></li>}
+                        { project.links?.google_drive && <li><a href={project.links.google_drive} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-google-drive"></i></a></li>}
+                        { project.links?.facebook && <li><a href={project.links.facebook} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-facebook"></i></a></li>}
+                        { project.links?.instagram && <li><a href={project.links.instagram} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-instagram"></i></a></li>}
+                        { project.links?.twitter && <li><a href={project.links.twitter} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-twitter"></i></a></li>}
+                        { project.links?.other_link && <li><a href={project.links.other_link} target='_blank' rel='noreferrer' className='link-third'><i class="fa-solid fa-link"></i></a></li>}
                     </ul>
                 </div>
             </div>
@@ -76,7 +76,6 @@ export default function ProjectDetail({project}){
                 <button className='btn btn-outline-warning projectBtn'><i class="fa-solid fa-box-archive"></i> Archive</button>
                 <button className='btn btn-outline-danger projectBtn ms-2'><i class="fa-solid fa-trash"></i> Delete</button>
                 </div>
-                
             </div>
         </div>
     )

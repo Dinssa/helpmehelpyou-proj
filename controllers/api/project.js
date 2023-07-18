@@ -33,7 +33,7 @@ async function create(req, res) {
 
         return res.json(project);
     } catch (err) {
-        return res.status(401).json(err);
+        return res.status(404).json(err);
     }
 }
 

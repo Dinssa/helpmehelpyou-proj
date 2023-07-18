@@ -5,18 +5,20 @@ import { useMediaQuery } from 'react-responsive'
 import { Form, Container, Row, Col } from 'react-bootstrap'
 
 // API
-import { searchProjects } from '../../utilities/projects-service';
+import { searchProjects, createProject } from '../../utilities/projects-service';
 
 // Components
 import ProjectList from '../../components/Project/ProjectList';
 import SearchBar from '../../components/global/SearchBar/SearchBar';
 import ProjectDetail from '../../components/Project/ProjectDetail';
+import NewProjectModal from '../../components/Project/Modals/NewProjectModal';
 
 export default function ProjectsPage(){
 
     const [searchQuery, setSearchQuery] = useState('')
     const [projects, setProjects] = useState([])
     const [selectedProject, setSelectedProject] = useState(null)
+    const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
     const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -26,13 +28,17 @@ export default function ProjectsPage(){
             setProjects(fetchedProjects);
         }
         fetchProjects();
-    }, [searchQuery])
+    }, [searchQuery, showNewProjectModal])
 
     const handleProjectSelect = (project) => {
         setSelectedProject(project)
     }
 
-    console.log(projects)
+    const handleProjectCreate = (project) => {
+        console.log(project)
+        createProject(project)
+        setShowNewProjectModal(false)
+    }
 
     return (
         <main className="ProjectsPage">
@@ -43,7 +49,7 @@ export default function ProjectsPage(){
                         <>
                         <Col xs={12} md={5} className='d-flex align-content-center flex-column'>
                             <div className='d-flex justify-content-end me-2 mb-2'>
-                                <button className='btn btn-outline-fourth projectBtn'><i class="fa-solid fa-square-plus"></i> New Project</button>
+                                <button className='btn btn-outline-fourth projectBtn' onClick={() => setShowNewProjectModal(true)}><i class="fa-solid fa-square-plus"></i> New Project</button>
                             </div>
                             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your projects'/>
                             <ProjectList projects={projects} handleProjectSelect={handleProjectSelect}/>
@@ -62,6 +68,7 @@ export default function ProjectsPage(){
                     </Row>
                 </Container>
             </div>
+            <NewProjectModal show={showNewProjectModal} onHide={()=>setShowNewProjectModal(false)} onSubmit={handleProjectCreate}/>
         </main>
     )
 }
