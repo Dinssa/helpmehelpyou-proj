@@ -59,9 +59,12 @@ export default function ProjectsPage(){
                         </Col>
                         </>
                     ) : (
-                        <Col xs={12} className='d-flex justify-content-center flex-column'>
+                        <Col xs={12} className='d-flex justify-content-center flex-column pb-3'>
                         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your projects'/>
                         <ProjectList projects={projects} handleProjectSelect={handleProjectSelect} />
+                        <div className='d-flex justify-content-end me-2 mb-3'>
+                            <button className='btn btn-outline-fourth projectBtn' onClick={() => setNewProjectModal(true)}><i class="fa-solid fa-square-plus"></i> New Project</button>
+                        </div>
                         <ProjectDetail project={selectedProject}/>
                         </Col>
                     )}
