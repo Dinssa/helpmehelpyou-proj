@@ -35,15 +35,15 @@ export default function ProjectsPage(){
     console.log(projects)
 
     return (
-        <main className="TProjectsPage">
-            <div className={`my-class ${isMd ? 'medium-screen' : 'small-screen'}`}>
+        <main className="ProjectsPage">
+            <div className={`${isMd ? 'medium-screen' : 'small-screen'}`}>
                 <Container fluid>
                     <Row>
                     {isMd ? (
                         <>
                         <Col xs={12} md={5} className='d-flex align-content-center flex-column'>
                             <div className='d-flex justify-content-end me-2 mb-2'>
-                                <button className='btn btn-outline-fourth'><i class="fa-solid fa-square-plus"></i> New Project</button>
+                                <button className='btn btn-outline-fourth projectBtn'><i class="fa-solid fa-square-plus"></i> New Project</button>
                             </div>
                             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your projects'/>
                             <ProjectList projects={projects} handleProjectSelect={handleProjectSelect}/>

@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    height: 85vh;
+    height: 87vh;
     width: 100%;
     font-size: 2rem;
     color: var(--third);
@@ -60,3 +60,22 @@ hr{
     text-decoration: none;
     color: var(--secondary);
 }
+
+.ProjectDetail-forms-list{
+    
+}
+
+.ProjectDetail-forms-list > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ProjectDetail-controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
