@@ -93,7 +93,7 @@ export default function TemplateViewer({fields}){
                                 <Form.Group controlId={field.name} className='heading fieldGroup'>
                                     <Container>
                                         <Row>
-                                            <Form.Label as="h2">{field.options?.value}</Form.Label>
+                                            <Form.Label as="h3">{field.options?.value}</Form.Label>
                                         </Row>
                                     </Container>
                                 </Form.Group>
@@ -103,7 +103,7 @@ export default function TemplateViewer({fields}){
                                 <Form.Group controlId={field.name} className='subheading fieldGroup'>
                                     <Container>
                                         <Row>
-                                            <Form.Label as="h3">{field.options?.value}</Form.Label>
+                                            <Form.Label as="h5">{field.options?.value}</Form.Label>
                                         </Row>
                                     </Container>
                                 </Form.Group>
@@ -120,7 +120,7 @@ export default function TemplateViewer({fields}){
                             )
                         } else if (field.type === 'divider'){
                             return (
-                                <Form.Group controlId={field.name} className='paragraph fieldGroup'>
+                                <Form.Group controlId={field.name} className='paragraph fieldGroup my-5'>
                                     <Container>
                                         <Row>
                                             <hr />
@@ -144,31 +144,4 @@ export default function TemplateViewer({fields}){
             </Form>
         </div>
     )
-
-    return (
-    <div className='TemplateEditor'>
-            {fields.map(field => {
-                
-                if (inputTypes.includes(field.type)){
-                    return (<div>
-                                <label>{field.label}</label>
-                                <input key={field.id} type={field.type} placeholder={field.name} className='TemplateEditor-field' />
-                            </div>)
-                } else if (otherInputTypes.includes(field.type)){
-                    if (field.type === 'textarea'){
-                        return (<div>
-                                    <label>{field.label}</label>
-                                    <textarea key={field.id} placeholder={field.name} className='TemplateEditor-field' />
-                                </div>)
-                    } else if (field.type === 'select'){
-                        return (<div>
-                                    <label>{field.label}</label>
-                                    <select key={field.id} className='TemplateEditor-field'>
-                                        {field.options.options && field.options.options.map(option => <option key={option.id} value={option.value}>{option.name}</option>)}
-                                    </select>
-                                </div>)
-                    }
-                }
-            })}
-    </div>)
 }
