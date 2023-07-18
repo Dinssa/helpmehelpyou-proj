@@ -9,7 +9,8 @@ import {    searchProjects,
             createProject, 
             deleteProject, 
             archiveProject, 
-            unarchiveProject 
+            unarchiveProject,
+            addFormToProject
     } from '../../utilities/projects-service';
 
 // Components
@@ -59,6 +60,11 @@ export default function ProjectsPage(){
         setSelectedProject(null)
     }
 
+    const handleAddFormToProject = (templateId, formName=null) => {
+        addFormToProject(selectedProject.id, templateId, formName)
+        setSelectedProject(null)
+    }
+
     return (
         <main className="ProjectsPage">
             <div className={`${isMd ? 'medium-screen' : 'small-screen'}`}>
@@ -74,17 +80,29 @@ export default function ProjectsPage(){
                             <ProjectList projects={projects} handleProjectSelect={handleProjectSelect}/>
                         </Col>
                         <Col xs={12} md={7} className={`d-flex justify-content-center ${selectedProject === null ? '' : ''}`}>
-                            <ProjectDetail project={selectedProject} onDelete={handleDeleteProject} onArchive={handleArchiveProject} onUnarchive={handleUnarchiveProject}/>
+                            <ProjectDetail 
+                                project={selectedProject}
+                                onDelete={handleDeleteProject} 
+                                onArchive={handleArchiveProject} 
+                                onUnarchive={handleUnarchiveProject} 
+                                onAddForm={handleAddFormToProject}
+                            />
                         </Col>
                         </>
                     ) : (
                         <Col xs={12} className='d-flex justify-content-center flex-column pb-3'>
-                        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your projects'/>
-                        <ProjectList projects={projects} handleProjectSelect={handleProjectSelect} />
-                        <div className='d-flex justify-content-end me-2 mb-3'>
-                            <button className='btn btn-outline-fourth projectBtn' onClick={() => setNewProjectModal(true)}><i class="fa-solid fa-square-plus"></i> New Project</button>
-                        </div>
-                        <ProjectDetail project={selectedProject} onDelete={handleDeleteProject} onArchive={handleArchiveProject} onUnarchive={handleUnarchiveProject}/>
+                            <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your projects'/>
+                            <ProjectList projects={projects} handleProjectSelect={handleProjectSelect} />
+                            <div className='d-flex justify-content-end me-2 mb-3'>
+                                <button className='btn btn-outline-fourth projectBtn' onClick={() => setNewProjectModal(true)}><i class="fa-solid fa-square-plus"></i> New Project</button>
+                            </div>
+                            <ProjectDetail 
+                                project={selectedProject} 
+                                onDelete={handleDeleteProject} 
+                                onArchive={handleArchiveProject} 
+                                onUnarchive={handleUnarchiveProject} 
+                                onAddForm={handleAddFormToProject}
+                            />
                         </Col>
                     )}
                     </Row>

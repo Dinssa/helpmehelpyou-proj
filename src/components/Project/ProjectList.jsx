@@ -1,10 +1,14 @@
 import './ProjectList.css'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive'
 
 export default function ProjectList({projects, handleProjectSelect}){
+
+    useEffect(() => {
+        console.log('ProjectList useEffect')
+    }, [projects])
     
     const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 

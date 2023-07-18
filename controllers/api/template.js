@@ -44,7 +44,8 @@ async function index(req, res) {
 async function userIndex(req, res) {
     try{
         const decodedToken = decodeToken(req);
-        const templates = await Template.find({user: decodedToken.user.id});
+        const templates = await Template.find({ user: decodedToken.user.id, type: "user" });
+        // const templates = await Template.find({user: decodedToken.user.id});
         if (!templates) throw new Error('No templates found');
 
         return res.json(templates);

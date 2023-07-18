@@ -65,10 +65,6 @@ hr{
     color: var(--secondary);
 }
 
-.ProjectDetail-forms-list{
-    
-}
-
 .ProjectDetail-forms-list > ul {
     list-style: none;
     padding: 0;
@@ -83,3 +79,17 @@ hr{
     margin-top: 20px;
 }
 
+.copyBtn{
+    border: none;
+    color: var(--info);
+    white-space: nowrap;
+}
+
+.copyBtn:hover{
+    background-color: transparent;
+    color: var(--third);
+}
+
+.formTitle{
+    text-align: left;
+}

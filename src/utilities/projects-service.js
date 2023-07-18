@@ -39,3 +39,7 @@ export async function unarchiveProject(id) {
 export async function getArchivedProjects() {
     return projectsAPI.getArchivedProjects();
 }
+
+export async function addFormToProject(projectId, formId, formName=null) {
+    return projectsAPI.addFormToProject(projectId, formId, formName);
+}

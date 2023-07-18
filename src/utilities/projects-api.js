@@ -57,3 +57,8 @@ export async function unarchiveProject(id) {
 export async function getArchivedProjects() {
     return sendRequest(`${BASE_URL}/user/archived`);
 }
+
+// Add a form to a project
+export async function addFormToProject(projectId, templateId, name) {
+    return sendRequest(`${BASE_URL}/addform/${projectId}/${templateId}`, 'POST', null, {name});
+}

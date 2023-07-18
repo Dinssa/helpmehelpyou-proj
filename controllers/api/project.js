@@ -174,16 +174,15 @@ async function deleteOne(req, res) {
 }
 
 // Add a form to a project, by creating a form (from an existing template) and adding the form's id to the project's forms array
-// POST /api/projects/addform/:projectId/:templateId
+// POST /api/projects/addform/:projectId?name=abc
 async function addForm(req, res) {
     try{
-        console.log(req.params);
         const project = await Project.findById(req.params.projectId);
         if (!project) throw new Error('Project not found');
         const template = await Template.findById(req.params.templateId);
         if (!template) throw new Error('Template not found');
         const form = await Form.create({
-            name: template.name, 
+            name: (req.query.name? req.query.name : template.name), 
             fields: template.fields
         });
         project.forms.push(form.id);

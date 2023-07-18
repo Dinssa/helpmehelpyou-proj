@@ -10,8 +10,13 @@ import { useMediaQuery } from 'react-responsive'
 import DeleteProjectModal from './Modals/DeleteProjectModal';
 import ArchiveProjectModal from './Modals/ArchiveProjectModal';
 import UnarchiveProjectModal from './Modals/UnarchiveProjectModal';
+import AddFormModal from './Modals/AddFormModal';
 
-export default function ProjectDetail({project, onDelete, onArchive, onUnarchive}){
+export default function ProjectDetail({project, onDelete, onArchive, onUnarchive, onAddForm}){
+
+    useEffect(() => {
+        console.log('updated project')
+    }, [project])
 
     const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -21,6 +26,7 @@ export default function ProjectDetail({project, onDelete, onArchive, onUnarchive
     const [showDeleteProjectModal, setDeleteProjectModal] = useState(false);
     const [showArchiveProjectModal, setArchiveProjectModal] = useState(false);
     const [showUnarchiveProjectModal, setUnarchiveProjectModal] = useState(false);
+    const [showAddFormModal, setAddFormModal] = useState(false);
 
     useEffect(() => {
         async function fetchForms() {
@@ -43,10 +49,6 @@ export default function ProjectDetail({project, onDelete, onArchive, onUnarchive
         </div>
     )
 
-    function handleAddForm() {
-        console.log('add form')
-    }
-
     function handleDeleteProject() {
         onDelete(project.id)
     }
@@ -58,13 +60,21 @@ export default function ProjectDetail({project, onDelete, onArchive, onUnarchive
     function handleUnarchiveProject(){
         onUnarchive(project.id)
     }
+
+    function handleAddFormToProject(templateId, formName) {
+        onAddForm(templateId, formName)
+    }
+
+    const handleCopyUrlClick = async (shortUrl) => {
+        await navigator.clipboard.writeText(shortUrl);
+    };
     
 
     return (
         <div className='ProjectDetail d-flex flex-column'>
             <div className='ProjectDetail-header w-100'>
                 <div className='ProjectDetail-header-name'><h1>{project.name}</h1></div>
-                <div className='ProjectDetail-header-actions w-100 d-flex justify-content-between align-content-center'>
+                <div className='ProjectDetail-header-actions w-100 d-flex justify-content-between align-items-center'>
                     <ul>
                         { project.links?.website && <li><a href={project.links.website} target='_blank' rel='noreferrer' className='link-third'><i class="fa-solid fa-globe"></i></a></li>}
                         { project.links?.google_drive && <li><a href={project.links.google_drive} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-google-drive"></i></a></li>}
@@ -81,12 +91,24 @@ export default function ProjectDetail({project, onDelete, onArchive, onUnarchive
             <div className='ProjectDetail-forms d-flex flex-column'>
                 <div className='ProjectDetail-forms-header d-flex justify-content-between'>
                     <h4>Project Forms</h4>
-                    <button className='btn btn-outline-fourth projectBtn' onClick={handleAddForm}><i class="fa-solid fa-square-plus"></i> Add Form</button>
+                    <button className='btn btn-outline-fourth projectBtn' onClick={() => setAddFormModal(true)}><i class="fa-solid fa-square-plus"></i> Add Form</button>
                 </div>
                 <div className='ProjectDetail-forms-list'>
-                    <ul>
+                    <ul className='mt-2'>
                         {forms.length === 0 && <li>No forms found</li>}
-                        {forms.map(form => <li key={form.id}>{form.name}</li>)}
+                        {forms.map(form => 
+                            <li key={form.id}>
+                                <div className='d-flex justify-content-between align-items-center my-2'>
+                                    <div className='d-flex align-items-center'>
+                                        <a href={form.shortUrl} className='formTitle link-secondary fw-bold link-underline link-underline-opacity-0'>{form.name}</a>
+                                        <div className='text-muted small ms-2'>({form.uuid})</div>
+                                    </div>
+                                    <div>
+                                        <button className='btn copyBtn' onClick={() => handleCopyUrlClick(form.shortUrl)}><i class="fa-solid fa-link"></i> Copy URL</button>
+                                    </div>
+                                </div>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
@@ -125,6 +147,13 @@ export default function ProjectDetail({project, onDelete, onArchive, onUnarchive
                 onHide={() => setUnarchiveProjectModal(false)}
                 onSubmit={handleUnarchiveProject}
                 project={project}
+            />
+            <AddFormModal
+                show={showAddFormModal}
+                onHide={() => setAddFormModal(false)}
+                onSubmit={handleAddFormToProject}
+                project={project}
+                templates={templates}
             />
         </div>
     )
