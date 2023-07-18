@@ -6,12 +6,17 @@ import { userIndex as TemplateUserIndex } from '../../utilities/templates-servic
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive'
 
-export default function ProjectDetail({project}){
+// Components
+import DeleteProjectModal from './Modals/DeleteProjectModal';
+
+export default function ProjectDetail({project, onDelete}){
 
     const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 
     const [forms, setForms] = useState([]);
     const [templates, setTemplates] = useState([]);
+
+    const [showDeleteProjectModal, setDeleteProjectModal] = useState(false);
 
     useEffect(() => {
         async function fetchForms() {
@@ -39,6 +44,10 @@ export default function ProjectDetail({project}){
 
     function handleAddForm() {
         console.log('add form')
+    }
+
+    function handleDeleteProject() {
+        onDelete(project.id)
     }
 
     return (
@@ -77,9 +86,15 @@ export default function ProjectDetail({project}){
                 </div>
                 <div>
                 <button className='btn btn-outline-warning projectBtn'><i class="fa-solid fa-box-archive"></i> Archive</button>
-                <button className='btn btn-outline-danger projectBtn ms-2'><i class="fa-solid fa-trash"></i> Delete</button>
+                <button onClick={() => setDeleteProjectModal(true)} className='btn btn-outline-danger projectBtn ms-2'><i class="fa-solid fa-trash"></i> Delete</button>
                 </div>
             </div>
+            <DeleteProjectModal 
+                show={showDeleteProjectModal}
+                onHide={() => setDeleteProjectModal(false)}
+                onSubmit={handleDeleteProject}
+                project={project}
+            />
         </div>
     )
 }

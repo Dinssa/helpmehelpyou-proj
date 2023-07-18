@@ -47,7 +47,7 @@ export default function NewProjectModal(props){
                         <Form.Label>Project Description</Form.Label>
                         <Form.Control as='textarea' placeholder='Project Description' value={projectDescription} onChange={handleProjectDescriptionChange}/>
                     </Form.Group>
-                    <Button variant="fourth" className='mb-3 text-white' onClick={handleShowLinks}>
+                    <Button variant="outline-fourth" className='mb-3' onClick={handleShowLinks}>
                     {showLinks ? 'Show Less' : 'Show More'}
                     </Button>
                     <Collapse in={showLinks}>
@@ -84,9 +84,9 @@ export default function NewProjectModal(props){
                     </Collapse>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant='danger' onClick={props.onHide}>Cancel</Button>
+            <Modal.Footer className='d-flex justify-content-center'>
                 <Button onClick={handleSubmit} variant='success text-white'>Create</Button>
+                <Button variant='danger' className='ms-2' onClick={props.onHide}>Cancel</Button>
             </Modal.Footer>
         </Modal>
     )
