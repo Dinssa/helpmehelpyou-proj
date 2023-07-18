@@ -54,7 +54,7 @@ export default function ProjectsPage(){
                             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your projects'/>
                             <ProjectList projects={projects} handleProjectSelect={handleProjectSelect}/>
                         </Col>
-                        <Col xs={12} md={7} className='d-flex justify-content-center'>
+                        <Col xs={12} md={7} className={`d-flex justify-content-center ${selectedProject === null ? 'bg-light' : ''}`}>
                             <ProjectDetail project={selectedProject}/>
                         </Col>
                         </>
