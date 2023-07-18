@@ -78,3 +78,11 @@ code {
 main{
   height: calc(100% - 7rem);
 }
+
+.letter-spacing-1{
+  letter-spacing: 1px;
+}
+
+.letter-spacing-2{
+  letter-spacing: 2px;
+}

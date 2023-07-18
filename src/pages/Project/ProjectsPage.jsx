@@ -5,14 +5,18 @@ import { useMediaQuery } from 'react-responsive'
 import { Form, Container, Row, Col } from 'react-bootstrap'
 
 // API
-import { searchProjects, createProject, deleteProject } from '../../utilities/projects-service';
+import {    searchProjects, 
+            createProject, 
+            deleteProject, 
+            archiveProject, 
+            unarchiveProject 
+    } from '../../utilities/projects-service';
 
 // Components
 import ProjectList from '../../components/Project/ProjectList';
 import SearchBar from '../../components/global/SearchBar/SearchBar';
 import ProjectDetail from '../../components/Project/ProjectDetail';
 import NewProjectModal from '../../components/Project/Modals/NewProjectModal';
-import { set } from 'mongoose';
 
 export default function ProjectsPage(){
 
@@ -36,14 +40,22 @@ export default function ProjectsPage(){
     }
 
     const handleProjectCreate = (project) => {
-        console.log(project)
         createProject(project)
         setNewProjectModal(false)
     }
 
     const handleDeleteProject = (id) => {
-        console.log(id)
         deleteProject(id)
+        setSelectedProject(null)
+    }
+
+    const handleArchiveProject = (id) => {
+        archiveProject(id)
+        setSelectedProject(null)
+    }
+
+    const handleUnarchiveProject = (id) => {
+        unarchiveProject(id)
         setSelectedProject(null)
     }
 
@@ -62,7 +74,7 @@ export default function ProjectsPage(){
                             <ProjectList projects={projects} handleProjectSelect={handleProjectSelect}/>
                         </Col>
                         <Col xs={12} md={7} className={`d-flex justify-content-center ${selectedProject === null ? '' : ''}`}>
-                            <ProjectDetail project={selectedProject} onDelete={handleDeleteProject}/>
+                            <ProjectDetail project={selectedProject} onDelete={handleDeleteProject} onArchive={handleArchiveProject} onUnarchive={handleUnarchiveProject}/>
                         </Col>
                         </>
                     ) : (
@@ -72,7 +84,7 @@ export default function ProjectsPage(){
                         <div className='d-flex justify-content-end me-2 mb-3'>
                             <button className='btn btn-outline-fourth projectBtn' onClick={() => setNewProjectModal(true)}><i class="fa-solid fa-square-plus"></i> New Project</button>
                         </div>
-                        <ProjectDetail project={selectedProject} onDelete={handleDeleteProject}/>
+                        <ProjectDetail project={selectedProject} onDelete={handleDeleteProject} onArchive={handleArchiveProject} onUnarchive={handleUnarchiveProject}/>
                         </Col>
                     )}
                     </Row>

@@ -132,6 +132,16 @@ async function search(req, res) {
         });
         if (!projects) throw new Error('Project not found');
 
+        projects.sort((a, b) => {
+            if (a.archived && !b.archived) {
+                return 1;
+            } else if (!a.archived && b.archived) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
         return res.json(projects);
     } catch (err) {
         return res.status(401).json(err);

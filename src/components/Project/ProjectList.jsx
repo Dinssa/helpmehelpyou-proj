@@ -17,7 +17,7 @@ export default function ProjectList({projects, handleProjectSelect}){
                 {projects.map(project =>
                         <li key={project.id}>
                             <Button variant="link" block="true" className='ProjectList-project' onClick={() => handleProjectSelect(project)}>
-                                <div className='ProjectList-project-name'>{project.name}</div>
+                                <div className='ProjectList-project-name'><span className='text-warning text-uppercase small letter-spacing-2'>{project.archived ? 'Archived ' : null}</span>{project.name}</div>
                                 <div className='ProjectList-project-description'>{project.desc}</div>
                             </Button>
                         </li>

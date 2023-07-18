@@ -8,8 +8,10 @@ import { useMediaQuery } from 'react-responsive'
 
 // Components
 import DeleteProjectModal from './Modals/DeleteProjectModal';
+import ArchiveProjectModal from './Modals/ArchiveProjectModal';
+import UnarchiveProjectModal from './Modals/UnarchiveProjectModal';
 
-export default function ProjectDetail({project, onDelete}){
+export default function ProjectDetail({project, onDelete, onArchive, onUnarchive}){
 
     const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -17,6 +19,8 @@ export default function ProjectDetail({project, onDelete}){
     const [templates, setTemplates] = useState([]);
 
     const [showDeleteProjectModal, setDeleteProjectModal] = useState(false);
+    const [showArchiveProjectModal, setArchiveProjectModal] = useState(false);
+    const [showUnarchiveProjectModal, setUnarchiveProjectModal] = useState(false);
 
     useEffect(() => {
         async function fetchForms() {
@@ -39,9 +43,6 @@ export default function ProjectDetail({project, onDelete}){
         </div>
     )
 
-    console.log(forms)
-    console.log(templates)
-
     function handleAddForm() {
         console.log('add form')
     }
@@ -50,11 +51,20 @@ export default function ProjectDetail({project, onDelete}){
         onDelete(project.id)
     }
 
+    function handleArchiveProject(){
+        onArchive(project.id)
+    }
+
+    function handleUnarchiveProject(){
+        onUnarchive(project.id)
+    }
+    
+
     return (
         <div className='ProjectDetail d-flex flex-column'>
-            <div className='ProjectDetail-header'>
+            <div className='ProjectDetail-header w-100'>
                 <div className='ProjectDetail-header-name'><h1>{project.name}</h1></div>
-                <div className='ProjectDetail-header-actions'>
+                <div className='ProjectDetail-header-actions w-100 d-flex justify-content-between align-content-center'>
                     <ul>
                         { project.links?.website && <li><a href={project.links.website} target='_blank' rel='noreferrer' className='link-third'><i class="fa-solid fa-globe"></i></a></li>}
                         { project.links?.google_drive && <li><a href={project.links.google_drive} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-google-drive"></i></a></li>}
@@ -63,6 +73,7 @@ export default function ProjectDetail({project, onDelete}){
                         { project.links?.twitter && <li><a href={project.links.twitter} target='_blank' rel='noreferrer' className='link-third'><i class="fa-brands fa-twitter"></i></a></li>}
                         { project.links?.other_link && <li><a href={project.links.other_link} target='_blank' rel='noreferrer' className='link-third'><i class="fa-solid fa-link"></i></a></li>}
                     </ul>
+                    <p className='text-warning text-uppercase small letter-spacing-2 fw-bold'>{project.archived ? 'Archived' : ''}</p>
                 </div>
             </div>
             <hr/>
@@ -85,14 +96,34 @@ export default function ProjectDetail({project, onDelete}){
                     <button className='btn btn-outline-fourth projectBtn ms-2'><i class="fa-solid fa-copy"></i> Clone</button>
                 </div>
                 <div>
-                <button className='btn btn-outline-warning projectBtn'><i class="fa-solid fa-box-archive"></i> Archive</button>
-                <button onClick={() => setDeleteProjectModal(true)} className='btn btn-outline-danger projectBtn ms-2'><i class="fa-solid fa-trash"></i> Delete</button>
+                    {project.archived ? (
+                    <button onClick={() => setUnarchiveProjectModal(true)} className='btn btn-outline-warning projectBtn'>
+                        <i class="fa-solid fa-box-archive"></i> Restore
+                    </button>
+                    ) : (
+                    <button onClick={() => setArchiveProjectModal(true)} className='btn btn-outline-warning projectBtn'>
+                        <i class="fa-solid fa-box-archive"></i> Archive
+                    </button>
+                    )}
+                    <button onClick={() => setDeleteProjectModal(true)} className='btn btn-outline-danger projectBtn ms-2'><i class="fa-solid fa-trash"></i> Delete</button>
                 </div>
             </div>
             <DeleteProjectModal 
                 show={showDeleteProjectModal}
                 onHide={() => setDeleteProjectModal(false)}
                 onSubmit={handleDeleteProject}
+                project={project}
+            />
+            <ArchiveProjectModal
+                show={showArchiveProjectModal}
+                onHide={() => setArchiveProjectModal(false)}
+                onSubmit={handleArchiveProject}
+                project={project}
+            />
+            <UnarchiveProjectModal
+                show={showUnarchiveProjectModal}
+                onHide={() => setUnarchiveProjectModal(false)}
+                onSubmit={handleUnarchiveProject}
                 project={project}
             />
         </div>

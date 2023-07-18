@@ -20,7 +20,6 @@ export default function NewProjectModal(props){
     }
 
     const handleSubmit = (e) => {
-        console.log('submitted')
         let data = {};
         data.name = projectName;
         data.desc = projectDescription;

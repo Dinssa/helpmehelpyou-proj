@@ -1,7 +1,7 @@
 import { Modal, Button, Form, Collapse } from 'react-bootstrap';
 import { useState } from 'react';
 
-export default function DeleteProjectModal(props){
+export default function ArchiveProjectModal(props){
 
     const handleSubmit = (e) => {
         const id = props.project.id;
@@ -15,10 +15,10 @@ export default function DeleteProjectModal(props){
         centered
         >
             <Modal.Header className='bg-primary'>
-                <Modal.Title className='text-white'>Delete: {props.project.name}</Modal.Title>
+                <Modal.Title className='text-white'>Archive: {props.project.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body className='text-center'>
-                <h4>Are you sure you want to delete this project?</h4>
+                <h4>Are you sure you want to archive this project?</h4>
             </Modal.Body>
             <Modal.Footer className='d-flex justify-content-center align-content-center'>
                 <Button onClick={handleSubmit} variant='success text-white '>Yes</Button>

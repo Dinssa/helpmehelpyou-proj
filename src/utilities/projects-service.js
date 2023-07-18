@@ -27,3 +27,15 @@ export async function deleteProject(id) {
 export async function defaultIndex() {
     return projectsAPI.defaultIndex();
 }
+
+export async function archiveProject(id) {
+    return projectsAPI.archiveProject(id);
+}
+
+export async function unarchiveProject(id) {
+    return projectsAPI.unarchiveProject(id);
+}
+
+export async function getArchivedProjects() {
+    return projectsAPI.getArchivedProjects();
+}

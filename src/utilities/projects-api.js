@@ -42,3 +42,18 @@ export async function updateProject(id, projectData) {
 export async function deleteProject(id) {
     return sendRequest(`${BASE_URL}/${id}`, 'DELETE');
 }
+
+// Archive a project
+export async function archiveProject(id) {
+    return sendRequest(`${BASE_URL}/archive/${id}`, 'PUT');
+}
+
+// Unarchive a project
+export async function unarchiveProject(id) {
+    return sendRequest(`${BASE_URL}/unarchive/${id}`, 'PUT');
+}
+
+// Get all archived projects
+export async function getArchivedProjects() {
+    return sendRequest(`${BASE_URL}/user/archived`);
+}
