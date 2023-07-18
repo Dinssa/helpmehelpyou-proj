@@ -25,3 +25,9 @@
     font-size: 1em;
     color: var(--secondary);
 }
+
+.ProjectList.mobile{
+    max-height: 200px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+}

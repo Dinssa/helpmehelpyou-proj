@@ -4,8 +4,11 @@ import './ProjectDetail.css'
 import { getForm } from '../../utilities/forms-service';
 import { userIndex as TemplateUserIndex } from '../../utilities/templates-service';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive'
 
 export default function ProjectDetail({project}){
+
+    const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 
     const [forms, setForms] = useState([]);
     const [templates, setTemplates] = useState([]);
@@ -26,7 +29,7 @@ export default function ProjectDetail({project}){
     }, [project])
 
     if (!project) return (
-        <div className='NullProjectDetail'>
+        <div className={`NullProjectDetail ${isMd ? '' : 'mobile'}`}>
             <p>Select a project<br/>to view details</p>
         </div>
     )

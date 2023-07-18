@@ -2,13 +2,16 @@ import './ProjectList.css'
 
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive'
 
 export default function ProjectList({projects, handleProjectSelect}){
+    
+    const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 
     if (!projects) return null;
 
     return (
-        <div className='ProjectList'>
+        <div className={`ProjectList ${isMd ? '' : 'mobile'}`}>
             <ul>
                 {projects.length === 0 && <li>No results found</li>}
                 {projects.map(project =>

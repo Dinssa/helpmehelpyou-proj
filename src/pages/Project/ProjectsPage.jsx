@@ -18,7 +18,7 @@ export default function ProjectsPage(){
     const [searchQuery, setSearchQuery] = useState('')
     const [projects, setProjects] = useState([])
     const [selectedProject, setSelectedProject] = useState(null)
-    const [showNewProjectModal, setShowNewProjectModal] = useState(false);
+    const [showNewProjectModal, setNewProjectModal] = useState(false);
 
     const isMd = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -37,7 +37,7 @@ export default function ProjectsPage(){
     const handleProjectCreate = (project) => {
         console.log(project)
         createProject(project)
-        setShowNewProjectModal(false)
+        setNewProjectModal(false)
     }
 
     return (
@@ -49,7 +49,7 @@ export default function ProjectsPage(){
                         <>
                         <Col xs={12} md={5} className='d-flex align-content-center flex-column'>
                             <div className='d-flex justify-content-end me-2 mb-2'>
-                                <button className='btn btn-outline-fourth projectBtn' onClick={() => setShowNewProjectModal(true)}><i class="fa-solid fa-square-plus"></i> New Project</button>
+                                <button className='btn btn-outline-fourth projectBtn' onClick={() => setNewProjectModal(true)}><i class="fa-solid fa-square-plus"></i> New Project</button>
                             </div>
                             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchPlaceholder='Search your projects'/>
                             <ProjectList projects={projects} handleProjectSelect={handleProjectSelect}/>
@@ -68,7 +68,7 @@ export default function ProjectsPage(){
                     </Row>
                 </Container>
             </div>
-            <NewProjectModal show={showNewProjectModal} onHide={()=>setShowNewProjectModal(false)} onSubmit={handleProjectCreate}/>
+            <NewProjectModal show={showNewProjectModal} onHide={()=>setNewProjectModal(false)} onSubmit={handleProjectCreate}/>
         </main>
     )
 }
