@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { signUp } from '../../utilities/users-service.js';
+import { Form, Button } from 'react-bootstrap';
 
 
 export default class SignUpForm extends Component {
@@ -43,30 +44,48 @@ export default class SignUpForm extends Component {
     render() {
         const disable = this.state.password !== this.state.confirm;
         return (
-          <div>
-            <div className="form-container">
-              <form autoComplete="off" onSubmit={this.handleSubmit} className='d-flex flex-column'>
-                <label>First Name</label>
-                <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required />
-                <label>Last Name</label>
-                <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} required />
-                <label>Email</label>
-                <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                <label>Password</label>
-                <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-                <label>Confirm</label>
-                <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-                <label>Role:</label>
-                <select id="role" name="role" value={this.state.roles} onChange={this.handleChange} multiple>
-                  <option value="Client">Client</option>
-                  <option value="Freelancer">Freelancer</option>
-                  <option value="Admin">Admin</option>
-                </select>
-                <button type="submit" disabled={disable}>SIGN UP</button>
-              </form>
+            <div className="SignUpForm">
+              <Form onSubmit={this.handleSubmit}>
+                <Form.Group controlId="formBasicFirstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicLastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} required />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicConfirm">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicRoles">
+                  <Form.Label>Role:</Form.Label>
+                  <Form.Control as="select" name="roles" value={this.state.roles} onChange={this.handleChange} multiple>
+                    <option value="Client">Client</option>
+                    <option value="Freelancer">Freelancer</option>
+                    <option value="Admin">Admin</option>
+                  </Form.Control>
+                </Form.Group>
+
+                <Button variant="primary" type="submit" className='mt-3' disabled={disable}>
+                  SIGN UP
+                </Button>
+              </Form>
+              <p className="error-message">&nbsp;{this.state.error}</p>
             </div>
-            <p className="error-message">&nbsp;{this.state.error}</p>
-          </div>
         );
     }    
   }
