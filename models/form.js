@@ -72,7 +72,7 @@ formSchema.virtual('archived').get(function() {
 });
 
 formSchema.virtual('shortUrl').get(function() {
-    return `${process.env.SHORT_URL}/form/${this.uuid}`;
+    return `${process.env.SHORT_URL}/form?f=${this.uuid}`;
 });
 
 module.exports = mongoose.model('Form', formSchema);

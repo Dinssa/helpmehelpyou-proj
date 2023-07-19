@@ -21,6 +21,7 @@ import TemplatesPage from '../Template/TemplatesPage';
 import TemplateEditorPage from '../Template/TemplateEditorPage';
 import TemplateViewPage from '../Template/TemplateViewPage';
 import FormsPage from '../Form/FormsPage';
+import FormPage from '../Form/FormPage';
 import ProfilePage from '../Account/ProfilePage';
 import SettingsPage from '../Account/SettingsPage';
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/template/editor" element={<TemplateEditorPage />} />
           <Route path="/template" element={<TemplateViewPage />} />
           <Route path="/forms" element={<FormsPage />} />
+          <Route path="/form" element={<FormPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/api" element={<iframe src="http://localhost:3001/api" style={{ width: '100%', height: '100%' }} />} />
@@ -55,6 +57,7 @@ function App() {
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/freelancers" element={<FreelancersPage />} />
           <Route path="/auth" element={<AuthPage setUser={setUser} />} />
+          <Route path="/form" element={<FormPage />} />
           <Route path="/404" element={<PageNotFound />} />
           <Route path="/template/editor" element={<Navigate to="/" />} />
           <Route path="/template" element={<Navigate to="/" />} />
