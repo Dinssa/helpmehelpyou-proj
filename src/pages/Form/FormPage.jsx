@@ -34,6 +34,7 @@ export default function FormPage(){
 
     return (
         <main className="FormPage pt-5">
+            <h1 className="text-center mb-5 text-secondary">{form?.name}</h1>
             <TemplateViewer fields={formFields} disable={false} onSubmit={handleOnSubmit} />
         </main>
     )

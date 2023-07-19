@@ -57,7 +57,7 @@ export default function NewProjectModal(props){
                         </Form.Group>
                         <Form.Group className='mb-3'>
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type='text' placeholder='Must include "https://"' name="email" value={projectLinks.email} onChange={handleProjectLinksChange} />
+                            <Form.Control type='text' placeholder='Must be a valid email address' name="email" value={projectLinks.email} onChange={handleProjectLinksChange} />
                         </Form.Group>
                         <Form.Group className='mb-3'>
                             <Form.Label>Google Drive</Form.Label>
