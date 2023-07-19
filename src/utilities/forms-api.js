@@ -16,3 +16,8 @@ export async function defaultIndex() {
 export async function getForm(id) {
     return sendRequest(`${BASE_URL}/${id}`);
 }
+
+// Get a single project by UUID
+export async function getFormByUUID(uuid) {
+    return sendRequest(`${BASE_URL}/uuid/${uuid}`);
+}

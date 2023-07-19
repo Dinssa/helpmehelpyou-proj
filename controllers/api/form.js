@@ -10,7 +10,8 @@ module.exports = {
     userIndexNonArchived,
     userIndexArchived,
     delete: deleteOne,
-    deleteAll
+    deleteAll,
+    showByUuid
 };
 
 // Create a form
@@ -87,6 +88,18 @@ async function userIndexArchived(req, res) {
 async function show(req, res) {
     try{
         const form = await Form.findById(req.params.id);
+        if (!form) throw new Error('Form not found');
+        return res.json(form);
+    } catch (err) {
+        return res.status(404).json(err);
+    }
+}
+
+// Show a form by uuid
+// GET /api/forms/uuid/:id
+async function showByUuid(req, res) {
+    try{
+        const form = await Form.findOne({uuid: req.params.id}); // Find form by uuid
         if (!form) throw new Error('Form not found');
         return res.json(form);
     } catch (err) {

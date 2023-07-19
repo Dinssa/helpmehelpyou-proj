@@ -163,6 +163,35 @@ router.get('/user/archived', ensureLoggedIn, formController.userIndexArchived);
 
 /**
  * @swagger
+ * /api/forms/uuid/{id}:
+ *   get:
+ *     summary: Get a form by UUID
+ *     description: Retrieves a single form by its UUID.
+ *     tags:
+ *       - Forms
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: UUID of the form to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: The requested form.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Form'
+ *       '404':
+ *         description: Form not found.
+ */
+router.get('/uuid/:id', ensureLoggedIn, formController.showByUuid)
+
+/**
+ * @swagger
  * /api/forms/{id}:
  *   get:
  *     summary: Get a form by ID

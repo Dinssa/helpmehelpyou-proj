@@ -3,12 +3,16 @@ import './TemplateViewer.css'
 import { Form, Container, Row, Col } from 'react-bootstrap'
 import { useState } from 'react';
 
-export default function TemplateViewer({fields}){
+export default function TemplateViewer({fields, disable=true, onSubmit}){
 
     const inputTypes = ['text', 'number', 'date', 'time', 'email', 'tel', 'url', 'password', 'color', 'range', 'file', 'checkbox', 'radio', 'hidden']
     const otherInputTypes = ['textarea', 'select', 'plaintext', 'heading', 'subheading', 'paragraph', 'divider']
 
-    const [disabled, setDisabled] = useState(true)
+    const [disabled, setDisabled] = useState(disable)
+
+    if (!fields) {
+        return null;
+    }
 
     return (
         <div className='TemplateViewer'>
@@ -135,7 +139,7 @@ export default function TemplateViewer({fields}){
                     <Container>
                         <Row>
                             <Col>
-                                <button type='submit' className='btn btn-primary' disabled={disabled}>Submit</button>
+                                <button type='submit' onClick={onSubmit}  className='btn btn-primary' disabled={disabled}>Submit</button>
                                 <button type='reset' className='btn btn-primary ms-3' disabled={disabled}>Reset</button>
                             </Col>
                         </Row>
