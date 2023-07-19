@@ -73,7 +73,7 @@ export default class SignUpForm extends Component {
 
                 <Form.Group controlId="formBasicRoles">
                   <Form.Label>Role:</Form.Label>
-                  <Form.Control as="select" name="roles" value={this.state.roles} onChange={this.handleChange} multiple>
+                  <Form.Control as="select" name="role" value={this.state.roles} onChange={this.handleChange} multiple>
                     <option value="Client">Client</option>
                     <option value="Freelancer">Freelancer</option>
                     <option value="Admin">Admin</option>
