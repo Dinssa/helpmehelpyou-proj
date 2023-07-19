@@ -9,23 +9,39 @@ export default function TemplateViewer({fields, disable=true, onSubmit}){
     const otherInputTypes = ['textarea', 'select', 'plaintext', 'heading', 'subheading', 'paragraph', 'divider']
 
     const [disabled, setDisabled] = useState(disable)
+    const [formData, setFormData] = useState(null)
 
     if (!fields) {
         return null;
     }
 
+    function handleChange(evt) {
+        setFormData({ ...formData, [evt.target.name]: evt.target.value });
+    }
+
+    function handleSubmit(evt) {
+        evt.preventDefault();
+        onSubmit(formData);
+    }
+
     return (
         <div className='TemplateViewer'>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 {fields.map(field => {
                     if (inputTypes.includes(field.type)){
                         return (
-                            <Form.Group controlId={field.name} className='inputType fieldGroup m-3'>
+                            <Form.Group controlId={field.label} className='inputType fieldGroup m-3'>
                                 <Container>
                                     <Row>
                                         {field.label && <Form.Label column sm={2}>{field.label}</Form.Label>}
                                         <Col>
-                                            <Form.Control type={field.type} {...(field.options.placeholder ? { placeholder: field.options.placeholder } : {})} disabled={disabled}/>
+                                            <Form.Control 
+                                                name={field.label}
+                                                value={formData?.[field.label]}
+                                                onChange={handleChange}
+                                                type={field.type} 
+                                                {...(field.options.placeholder ? { placeholder: field.options.placeholder } : {})} 
+                                                disabled={disabled}/>
                                             {field.text && (
                                                 <Form.Text className="text-muted">
                                                 {field.text}
@@ -39,7 +55,7 @@ export default function TemplateViewer({fields, disable=true, onSubmit}){
                     } else if (otherInputTypes.includes(field.type)){
                         if (field.type === 'textarea'){
                             return (
-                                <Form.Group controlId={field.name} className='textarea fieldGroup'>
+                                <Form.Group controlId={field.label} className='textarea fieldGroup'>
                                     <Container>
                                         <Row>
                                             {field.label && <Form.Label column sm={2}>{field.label}</Form.Label>}
@@ -49,6 +65,9 @@ export default function TemplateViewer({fields, disable=true, onSubmit}){
                                                 {...(field.options.rows ? { rows: field.options.rows } : {})}
                                                 {...(field.options.placeholder ? { placeholder: field.options.placeholder } : {})}
                                                 disabled={disabled}
+                                                name={field.label}
+                                                value={formData?.[field.label]}
+                                                onChange={handleChange}
                                             />
                                             {field.text && (
                                                 <Form.Text className="text-muted">
@@ -62,12 +81,18 @@ export default function TemplateViewer({fields, disable=true, onSubmit}){
                             )
                         } else if (field.type === 'select'){
                             return (
-                                <Form.Group controlId={field.name} className='select fieldGroup'>
+                                <Form.Group controlId={field.label} className='select fieldGroup'>
                                     <Container>
                                         <Row>
                                             {field.label && <Form.Label column sm={2}>{field.label}</Form.Label>}
                                             <Col>
-                                            <Form.Select multiple={field.options?.multiple} disabled={disabled}>
+                                            <Form.Select 
+                                                multiple={field.options?.multiple} 
+                                                disabled={disabled} 
+                                                name={field.label}
+                                                value={formData?.[field.label]}
+                                                onChange={handleChange}
+                                            >
                                                 {field.options?.options && field.options.options.map(option => (
                                                 <option key={option}>{option}</option>
                                                 ))}
@@ -139,7 +164,7 @@ export default function TemplateViewer({fields, disable=true, onSubmit}){
                     <Container>
                         <Row>
                             <Col>
-                                <button type='submit' onClick={onSubmit}  className='btn btn-primary' disabled={disabled}>Submit</button>
+                                <button type='submit' className='btn btn-primary' disabled={disabled}>Submit</button>
                                 <button type='reset' className='btn btn-primary ms-3' disabled={disabled}>Reset</button>
                             </Col>
                         </Row>

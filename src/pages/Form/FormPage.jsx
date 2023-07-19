@@ -29,10 +29,9 @@ export default function FormPage(){
     }, [formUUID])
 
     const handleOnSubmit = (form) => {
-
+        console.log(form)
     }
 
-    
     return (
         <main className="FormPage pt-5">
             <TemplateViewer fields={formFields} disable={false} onSubmit={handleOnSubmit} />
