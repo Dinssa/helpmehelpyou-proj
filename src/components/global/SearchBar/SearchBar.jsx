@@ -4,7 +4,6 @@ import { Form, FormControl, InputGroup } from 'react-bootstrap';
 export default function SearchBar({searchQuery, setSearchQuery, searchPlaceholder="Search"}){
 
   function handleChanges(e){
-    console.log(e.target.value)
     setSearchQuery(e.target.value)
   }
 

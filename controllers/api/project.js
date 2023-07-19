@@ -4,8 +4,8 @@ const Template = require('../../models/template');
 const decodeToken = require('../../config/decodeToken');
 
 module.exports = {
-    create, //works
-    index, //works
+    create,
+    index,
     userIndex,
     userIndexNonArchived,
     userIndexArchived,
