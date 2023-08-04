@@ -1,9 +1,4 @@
-# Hostnames
-SERVER_HOST=
-CLIENT_HOST=
-
 # Ports
-PORT=
 SERVER_PORT=
 
 # MongoDB
