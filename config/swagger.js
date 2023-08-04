@@ -2,11 +2,6 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
 
-const serverHost = process.env.SERVER_HOST;
-const port = process.env.SERVER_PORT;
-const serverUrl = `http://${serverHost}:${port}`;
-
-
 const options = {
   definition: {
     openapi: '3.0.0',
