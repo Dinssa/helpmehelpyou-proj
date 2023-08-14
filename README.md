@@ -10,7 +10,7 @@ This website…
 - MongoDB, a flexible and NoSQL document database, stores all the data in this project, such as users, templates, forms, and projects.
 - The appearance is enhanced by Bootstrap sass, which allows some customization of variables. Font Awesome icons and Google fonts are also used to improve the look and feel.
 
-# Live Peview
+# Live Preview
 <p align="center">
 Check out this site deployed on <a href="https://www.heroku.com/">Heroku</a>
 <br>
