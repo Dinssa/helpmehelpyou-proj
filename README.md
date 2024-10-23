@@ -62,11 +62,11 @@ General Project Requirements:
 
 # Planning
 ## Entity Relationship Diagram
-[![First ERD](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216564&authkey=%21ACEncFkDuIYFpWg&width=900)](#)  
+[![First ERD](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216564&authkey=%21ACEncFkDuIYFpWg&width=700)](#)  
 I started planning this project by creating an ERD diagram that showed the structure and relationships of the database. It was a useful guide, but not the final version. As I coded, I realised that there were some inefficiencies and improvements that could be made.
 
 The following ERD diagram is more accurate and reflects the changes I made:  
-[![Final ERD](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216561&authkey=%21AL3odlI_nnXizUM&width=900)](#)  
+[![Final ERD](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216561&authkey=%21AL3odlI_nnXizUM&width=700)](#)  
 
 The ERD consists of 4 main models and 3 embedded documents:
 - User 
@@ -75,23 +75,23 @@ The ERD consists of 4 main models and 3 embedded documents:
 - Template (containing the fields document which contains the options document)
 
 ## Mockups
-[![Home page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216562&authkey=%21ALSR-xu2UVDBRlw&width=900)](#)  
+[![Home page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216562&authkey=%21ALSR-xu2UVDBRlw&width=700)](#)  
 
 The home page, along with the ‘Clients’ and ‘Freelancers’ pages, provides clear and concise information about how the site can benefit vistors.  
 
-[![Templates page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216565&authkey=%21AJn6yBZuGhPHK2w&width=900)](#)  
+[![Templates page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216565&authkey=%21AJn6yBZuGhPHK2w&width=700)](#)  
 
 The templates page enables freelancers to design and save customised forms that they can easily reuse for their projects.  
 
-[![Template editor page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216567&authkey=%21AN6rxyz3ewgnxS8&width=900)](#)  
+[![Template editor page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216567&authkey=%21AN6rxyz3ewgnxS8&width=700)](#)  
 
 The site’s key feature is the template editor, which allows freelancers to create custom forms with various input types, arrange them with drag and drop functionality, and configure the options for each field.  
 
-[![Projects page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216568&authkey=%21AH_bpfIypEFiM9E&width=900)](#)  
+[![Projects page](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216568&authkey=%21AH_bpfIypEFiM9E&width=700)](#)  
 
 Using their own templates, freelancers can easily manage multiple projects for different clients or jobs, and generate forms for each aspect of their work. They can also copy a link to each form and share it with their clients, who can fill in the required information online.  
 
-[![Landing page for clients before a form](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216566&authkey=%21APgR-m14HIL4SXU&width=900)](#)  
+[![Landing page for clients before a form](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216566&authkey=%21APgR-m14HIL4SXU&width=700)](#)  
 
 When a client receives a link from the freelancer, they can access the form through this landing page. They have the option to either log in and create an account, which allows them to store and review their forms, or to complete it as a guest without signing in.  
 
@@ -118,7 +118,7 @@ If we follow one example use of the api to create a new project it starts in the
 ```
 When you click on the New Project button, a modal window will pop up with a form that lets you create a new project. The form has some basic fields, such as project name and description. It also has an expandable section that allows you to add some optional links that are related to your project. You can use these links to save some useful resources or references for your project.  
 
-[![New project form](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216573&authkey=%21AEke1WPF7n_ac0M&width=900)](#)
+[![New project form](https://onedrive.live.com/embed?resid=3AAE4294F4C93984%216573&authkey=%21AEke1WPF7n_ac0M&width=700)](#)
 
 When a user clicks create the form data is passed along from the modal component to the projects page. 
 
